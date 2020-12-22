@@ -29,31 +29,26 @@
           <Property Name="Name" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Students.dbo.t_RegisterBooks' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="t_RegisterBooks">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="LanguageId" />
-            <PropertyRef Name="PublisherId" />
-            <PropertyRef Name="CreateDate" />
-            <PropertyRef Name="DeliveryDate" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="250" />
           <Property Name="SubTitle" Type="nvarchar" MaxLength="250" />
           <Property Name="BookNo" Type="nvarchar" MaxLength="250" />
-          <Property Name="LanguageId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LanguageId" Type="uniqueidentifier" />
           <Property Name="ISBN_No" Type="nvarchar" MaxLength="250" />
           <Property Name="Edition" Type="nvarchar" MaxLength="250" />
           <Property Name="Copies" Type="nvarchar" MaxLength="250" />
-          <Property Name="PublisherId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PublisherId" Type="uniqueidentifier" />
           <Property Name="PublishedYear" Type="nvarchar" MaxLength="250" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
-          <Property Name="DeliveryDate" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="DeliveryDate" Type="datetime" Nullable="false" />
+          <Property Name="CategoryId" Type="uniqueidentifier" />
         </EntityType>
         <Association Name="FK_t_RegisterBooks_t_Languages">
-          <End Role="t_Languages" Type="Self.t_Languages" Multiplicity="1" />
+          <End Role="t_Languages" Type="Self.t_Languages" Multiplicity="0..1" />
           <End Role="t_RegisterBooks" Type="Self.t_RegisterBooks" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="t_Languages">
@@ -65,7 +60,7 @@ warning 6002: The table/view 'Students.dbo.t_RegisterBooks' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_t_RegisterBooks_t_Publishers">
-          <End Role="t_Publishers" Type="Self.t_Publishers" Multiplicity="1" />
+          <End Role="t_Publishers" Type="Self.t_Publishers" Multiplicity="0..1" />
           <End Role="t_RegisterBooks" Type="Self.t_RegisterBooks" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="t_Publishers">
@@ -80,22 +75,7 @@ warning 6002: The table/view 'Students.dbo.t_RegisterBooks' does not have a prim
           <EntitySet Name="t_Categories" EntityType="Self.t_Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t_Languages" EntityType="Self.t_Languages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t_Publishers" EntityType="Self.t_Publishers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="t_RegisterBooks" EntityType="Self.t_RegisterBooks" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [t_RegisterBooks].[Id] AS [Id], 
-    [t_RegisterBooks].[Title] AS [Title], 
-    [t_RegisterBooks].[SubTitle] AS [SubTitle], 
-    [t_RegisterBooks].[BookNo] AS [BookNo], 
-    [t_RegisterBooks].[LanguageId] AS [LanguageId], 
-    [t_RegisterBooks].[ISBN_No] AS [ISBN_No], 
-    [t_RegisterBooks].[Edition] AS [Edition], 
-    [t_RegisterBooks].[Copies] AS [Copies], 
-    [t_RegisterBooks].[PublisherId] AS [PublisherId], 
-    [t_RegisterBooks].[PublishedYear] AS [PublishedYear], 
-    [t_RegisterBooks].[CreateDate] AS [CreateDate], 
-    [t_RegisterBooks].[DeliveryDate] AS [DeliveryDate]
-    FROM [dbo].[t_RegisterBooks] AS [t_RegisterBooks]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="t_RegisterBooks" EntityType="Self.t_RegisterBooks" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_t_RegisterBooks_t_Languages" Association="Self.FK_t_RegisterBooks_t_Languages">
             <End Role="t_Languages" EntitySet="t_Languages" />
             <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
@@ -152,28 +132,25 @@ warning 6002: The table/view 'Students.dbo.t_RegisterBooks' does not have a prim
         <EntityType Name="t_RegisterBooks">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="LanguageId" />
-            <PropertyRef Name="PublisherId" />
-            <PropertyRef Name="CreateDate" />
-            <PropertyRef Name="DeliveryDate" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="SubTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="BookNo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="LanguageId" Type="Guid" Nullable="false" />
+          <Property Name="LanguageId" Type="Guid" />
           <Property Name="ISBN_No" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Edition" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Copies" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="PublisherId" Type="Guid" Nullable="false" />
+          <Property Name="PublisherId" Type="Guid" />
           <Property Name="PublishedYear" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeliveryDate" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DeliveryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CategoryId" Type="Guid" />
           <NavigationProperty Name="t_Languages" Relationship="StudentsModel.FK_t_RegisterBooks_t_Languages" FromRole="t_RegisterBooks" ToRole="t_Languages" />
           <NavigationProperty Name="t_Publishers" Relationship="StudentsModel.FK_t_RegisterBooks_t_Publishers" FromRole="t_RegisterBooks" ToRole="t_Publishers" />
         </EntityType>
         <Association Name="FK_t_RegisterBooks_t_Languages">
-          <End Type="StudentsModel.t_Languages" Role="t_Languages" Multiplicity="1" />
+          <End Type="StudentsModel.t_Languages" Role="t_Languages" Multiplicity="0..1" />
           <End Type="StudentsModel.t_RegisterBooks" Role="t_RegisterBooks" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="t_Languages">
@@ -185,7 +162,7 @@ warning 6002: The table/view 'Students.dbo.t_RegisterBooks' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_t_RegisterBooks_t_Publishers">
-          <End Type="StudentsModel.t_Publishers" Role="t_Publishers" Multiplicity="1" />
+          <End Type="StudentsModel.t_Publishers" Role="t_Publishers" Multiplicity="0..1" />
           <End Type="StudentsModel.t_RegisterBooks" Role="t_RegisterBooks" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="t_Publishers">
@@ -196,7 +173,7 @@ warning 6002: The table/view 'Students.dbo.t_RegisterBooks' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -232,6 +209,7 @@ warning 6002: The table/view 'Students.dbo.t_RegisterBooks' does not have a prim
           <EntitySetMapping Name="t_RegisterBooks">
             <EntityTypeMapping TypeName="StudentsModel.t_RegisterBooks">
               <MappingFragment StoreEntitySet="t_RegisterBooks">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="PublishedYear" ColumnName="PublishedYear" />

@@ -169,6 +169,7 @@
     <Content Include="Content\content\docs\js\jquery.min.js" />
     <Content Include="Content\content\docs\js\shBrushXml.js" />
     <Content Include="Content\content\docs\js\shCore.js" />
+    <Content Include="Content\content\images\skisoftlogo.png" />
     <Content Include="Content\content\src\js\custom.js" />
     <Content Include="Content\content\src\js\examples.js" />
     <Content Include="Content\content\src\js\helpers\smartresize.js" />
@@ -4949,6 +4950,9 @@
     <Content Include="Views\Language\Create.cshtml" />
     <Content Include="Views\Language\Edit.cshtml" />
     <Content Include="Views\Language\Index.cshtml" />
+    <Content Include="Views\RegisterBook\Index.cshtml" />
+    <Content Include="Views\RegisterBook\Create.cshtml" />
+    <Content Include="Views\RegisterBook\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

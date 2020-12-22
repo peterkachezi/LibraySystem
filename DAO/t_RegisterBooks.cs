@@ -18,14 +18,15 @@ namespace DAO
         public string Title { get; set; }
         public string SubTitle { get; set; }
         public string BookNo { get; set; }
-        public System.Guid LanguageId { get; set; }
+        public Nullable<System.Guid> LanguageId { get; set; }
         public string ISBN_No { get; set; }
         public string Edition { get; set; }
         public string Copies { get; set; }
-        public System.Guid PublisherId { get; set; }
+        public Nullable<System.Guid> PublisherId { get; set; }
         public string PublishedYear { get; set; }
         public System.DateTime CreateDate { get; set; }
-        public string DeliveryDate { get; set; }
+        public System.DateTime DeliveryDate { get; set; }
+        public Nullable<System.Guid> CategoryId { get; set; }
     
         public virtual t_Languages t_Languages { get; set; }
         public virtual t_Publishers t_Publishers { get; set; }

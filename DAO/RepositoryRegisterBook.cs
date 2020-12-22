@@ -10,6 +10,12 @@ namespace DAO
 {
     public class RepositoryRegisterBook
     {
+
+
+
+
+
+
         public static bool AddBook(RegisterBookBLL registerBookBLL)
         {
             using (StudentsEntities context = new StudentsEntities())
@@ -40,8 +46,9 @@ namespace DAO
 
                         CreateDate = DateTime.Now,
 
-                        DeliveryDate = registerBookBLL.DeliveryDate
+                        DeliveryDate = registerBookBLL.DeliveryDate,
 
+                        CategoryId = registerBookBLL.CategoryId,
                     };
 
                     context.t_RegisterBooks.Add(t_RegisterBooks);
@@ -77,19 +84,23 @@ namespace DAO
 
                     book.BookNo = t_RegisterBook.BookNo;
 
-                    book.LanguageId = t_RegisterBook.LanguageId;
+                    book.LanguageId = (Guid)t_RegisterBook.LanguageId;
 
                     book.LanguageName = t_RegisterBook.t_Languages.LanguageName;
 
                     book.ISBN_No = t_RegisterBook.ISBN_No;
 
+                    book.CreateDate = t_RegisterBook.CreateDate;
+
                     book.Edition = t_RegisterBook.Edition;
 
                     book.Copies = t_RegisterBook.Copies;
 
-                    book.PublisherId = t_RegisterBook.PublisherId;
+                    book.PublisherId = (Guid)t_RegisterBook.PublisherId;
 
                     book.PublisherName = t_RegisterBook.t_Publishers.Name;
+
+                    book.CategoryId = (Guid)t_RegisterBook.CategoryId;
 
                     book.PublishedYear = t_RegisterBook.PublishedYear;
 
@@ -120,7 +131,7 @@ namespace DAO
 
                     BookNo = t_RegisterBooks.BookNo,
 
-                    LanguageId = t_RegisterBooks.LanguageId,
+                    LanguageId = (Guid)t_RegisterBooks.LanguageId,
 
                     ISBN_No = t_RegisterBooks.ISBN_No,
 
@@ -128,13 +139,15 @@ namespace DAO
 
                     Copies = t_RegisterBooks.Copies,
 
-                    PublisherId = t_RegisterBooks.PublisherId,
+                    PublisherId = (Guid)t_RegisterBooks.PublisherId,
 
                     PublishedYear = t_RegisterBooks.PublishedYear,
 
                     CreateDate = t_RegisterBooks.CreateDate,
 
-                    DeliveryDate = t_RegisterBooks.DeliveryDate
+                    DeliveryDate = t_RegisterBooks.DeliveryDate,
+
+                    CategoryId= (Guid)t_RegisterBooks.CategoryId,
 
                 };
             }
@@ -152,7 +165,7 @@ namespace DAO
 
                         t_RegisterBooks.Title = registerBookBLL.Title;
 
-                        t_RegisterBooks . SubTitle=registerBookBLL.SubTitle;
+                        t_RegisterBooks.SubTitle = registerBookBLL.SubTitle;
 
                         t_RegisterBooks.BookNo = registerBookBLL.BookNo;
 
@@ -165,10 +178,12 @@ namespace DAO
                         t_RegisterBooks.Copies = registerBookBLL.Copies;
 
                         t_RegisterBooks.PublisherId = registerBookBLL.PublisherId;
-                              
+
                         t_RegisterBooks.PublishedYear = registerBookBLL.PublishedYear;
 
                         t_RegisterBooks.DeliveryDate = registerBookBLL.DeliveryDate;
+
+                        t_RegisterBooks.CategoryId = registerBookBLL.CategoryId;
 
                         context.SaveChanges();
 

@@ -21,8 +21,8 @@ namespace BLL
         public string PublisherName { get; set; }
         public string PublishedYear { get; set; }
         public DateTime CreateDate { get; set; }
-        public string DeliveryDate { get; set; }
-
+        public DateTime DeliveryDate { get; set; }
+        public System.Guid CategoryId { get; set; }
 
     }
 }

@@ -8,7 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="~/Content/content/production/images/favicon.ico" type="image/ico" />
 
-    <title>Skisoft | Library</title>
+    <title>ebook | Library</title>
+
+
+
+    <link href="~/Content/content/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/content/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/content/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/content/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+
 
     <!-- Bootstrap -->
     <link href="~/Content/content/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -34,7 +42,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="/Home/" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+                        <a href="/Home/" class="site_title"><i class="fa fa-book"></i> <span>ebooks</span></a>
                     </div>
                     <div class="clearfix"></div>
 
@@ -67,13 +75,13 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                                    <a><i class="fa fa-bookmark-o"></i> Manage Books <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="#">General Form</a></li>
-                                        <li><a href="#">Advanced Components</a></li>
-                                        <li><a href="#">Form Validation</a></li>
-                                        <li><a href="#">Form Wizard</a></li>
-                                        <li><a href="#">Form Upload</a></li>
+                                        <li><a href="/RegisterBook/Index">Register Books</a></li>
+                                        <li><a href="#">Issue Book</a></li>
+                                        <li><a href="#">Return Book</a></li>
+                                        <li><a href="#">Report Lost Book</a></li>
+                                        <li><a href="#">Add Stock</a></li>
                                         <li><a href="#">Form Buttons</a></li>
                                     </ul>
                                 </li>
@@ -281,7 +289,6 @@
                 </div>
             </div>
             <!-- /top navigation -->
-
             <!-- page content -->
             <div class="right_col" role="main">
                 @RenderBody()
@@ -340,4 +347,20 @@
     <!-- Custom Theme Scripts -->
     <script src="~/Content/content/build/js/custom.min.js"></script>
 
+    <!-- Datatables -->
+    <script src="~/Content/content/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/content/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Content/content/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Content/content/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="~/Content/content/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="~/Content/content/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/Content/content/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="~/Content/content/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="~/Content/content/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="~/Content/content/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Content/content/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="~/Content/content/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="~/Content/content/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="~/Content/content/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="~/Content/content/vendors/pdfmake/build/vfs_fonts.js"></script>
 </body>

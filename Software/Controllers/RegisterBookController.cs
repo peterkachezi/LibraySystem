@@ -13,28 +13,45 @@ namespace Software.Controllers
         // GET: RegisterBooks
         public ActionResult Index()
         {
+            var books = RepositoryRegisterBook.GetAllBooks();
+
+            ViewBag.Books = books;
+
+
             return View();
         }
 
         [HttpGet]
         public ActionResult Create()
         {
+            //get languages and publishers to dropdown
+            var languages = RepositoryLanguage.GetAllLanguages();
+            ViewBag.Languages = languages;
+
+            var publishers = RepositoryPublisher.GetAllPublishers();
+            ViewBag.Publishers = publishers;
+
+            var categories = RepositoryCategory.GetAllCategories();
+            ViewBag.Categories = categories;
+
+            // end
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(CategoryBLL bookCategoryBLL)
+        public ActionResult Create(RegisterBookBLL registerBookBLL)
         {
+        
 
-            var result = RepositoryCategory.AddCategory(bookCategoryBLL);
+            var result = RepositoryRegisterBook.AddBook(registerBookBLL);
             if (result)
             {
-                TempData["Success"] = "Category added successfully!";
+                TempData["Success"] = "Book added successfully!";
 
                 return RedirectToAction("Index");
             }
 
-            TempData["Error"] = "Failed to add Facility. Please try again!";
+            TempData["Error"] = "Failed to add book. Please try again!";
 
             return View();
         }
@@ -44,6 +61,21 @@ namespace Software.Controllers
 
         public ActionResult Edit(Guid Id)
         {
+            //get languages and publishers to dropdown
+            var languages = RepositoryLanguage.GetAllLanguages();
+            ViewBag.Languages = languages;
+
+            var publishers = RepositoryPublisher.GetAllPublishers();
+            ViewBag.Publishers = publishers;
+
+
+            var categories = RepositoryCategory.GetAllCategories();
+            ViewBag.Categories = categories;
+
+            // end
+
+
+
             var book = RepositoryRegisterBook.GetSingleBook(Id);
             return View(book);
         }
@@ -51,19 +83,19 @@ namespace Software.Controllers
 
 
         [HttpPost]
-        public ActionResult Edit(Guid id, CategoryBLL categoryBLL)
+        public ActionResult Edit(Guid id, RegisterBookBLL registerBookBLL)
         {
-            var results = RepositoryCategory.EditCategory(id, categoryBLL);
+            var results = RepositoryRegisterBook.EditBook(id, registerBookBLL);
             if (results)
             {
-                TempData["Success"] = "Category updated successfully!";
+                TempData["Success"] = "Book updated successfully!";
                 return RedirectToAction("Index");
             }
             else
             {
-                TempData["Error"] = "Failed to update facility. Please try again!";
+                TempData["Error"] = "Failed to update Book. Please try again!";
             }
-            return View(categoryBLL);
+            return View(registerBookBLL);
         }
     }
 }
