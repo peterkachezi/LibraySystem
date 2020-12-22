@@ -42,7 +42,6 @@ namespace DAO
 
                         DeliveryDate = registerBookBLL.DeliveryDate
 
-
                     };
 
                     context.t_RegisterBooks.Add(t_RegisterBooks);
@@ -136,7 +135,6 @@ namespace DAO
                     CreateDate = t_RegisterBooks.CreateDate,
 
                     DeliveryDate = t_RegisterBooks.DeliveryDate
-
 
                 };
             }
