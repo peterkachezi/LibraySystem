@@ -5,12 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="750bd233fe5e44c48404a1bdf63c424a" Name="Diagram1">
-        <EntityTypeShape EntityType="StudentsModel.t_Categories" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StudentsModel.t_Languages" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="StudentsModel.t_Publishers" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentsModel.t_Categories" Width="1.5" PointX="4.625" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentsModel.t_Languages" Width="1.5" PointX="0.875" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentsModel.t_Publishers" Width="1.5" PointX="0.875" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="StudentsModel.t_RegisterBooks" Width="1.5" PointX="3" PointY="1.125" />
         <AssociationConnector Association="StudentsModel.FK_t_RegisterBooks_t_Languages" />
         <AssociationConnector Association="StudentsModel.FK_t_RegisterBooks_t_Publishers" />
+        <EntityTypeShape EntityType="StudentsModel.t_Students" Width="1.5" PointX="7.625" PointY="2.625" />
+        <EntityTypeShape EntityType="StudentsModel.t_Stream" Width="1.5" PointX="5.375" PointY="4.625" />
+        <AssociationConnector Association="StudentsModel.FK_t_Students_t_Stream" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

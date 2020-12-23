@@ -29,5 +29,7 @@ namespace DAO
         public virtual DbSet<t_Languages> t_Languages { get; set; }
         public virtual DbSet<t_Publishers> t_Publishers { get; set; }
         public virtual DbSet<t_RegisterBooks> t_RegisterBooks { get; set; }
+        public virtual DbSet<t_Students> t_Students { get; set; }
+        public virtual DbSet<t_Stream> t_Stream { get; set; }
     }
 }

@@ -71,6 +71,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="RepositoryStudent.cs" />
+    <Compile Include="RepositoryStream.cs" />
     <Compile Include="RepositoryRegisterBook.cs" />
     <Compile Include="RepositoryLanguage.cs" />
     <Compile Include="RepositoryPublisher.cs" />
@@ -87,6 +89,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="t_RegisterBooks.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="t_Stream.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="t_Students.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
   </ItemGroup>

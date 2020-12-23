@@ -129,10 +129,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\StreamController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\PublisherController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\RegisterBookController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -4953,11 +4955,15 @@
     <Content Include="Views\RegisterBook\Index.cshtml" />
     <Content Include="Views\RegisterBook\Create.cshtml" />
     <Content Include="Views\RegisterBook\Edit.cshtml" />
+    <Content Include="Views\Stream\Create.cshtml" />
+    <Content Include="Views\Stream\Edit.cshtml" />
+    <Content Include="Views\Stream\Index.cshtml" />
+    <Content Include="Views\Student\Create.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\RegisterBooks\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

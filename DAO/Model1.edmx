@@ -47,6 +47,28 @@
           <Property Name="DeliveryDate" Type="datetime" Nullable="false" />
           <Property Name="CategoryId" Type="uniqueidentifier" />
         </EntityType>
+        <EntityType Name="t_Stream">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_Students">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AdmNo" Type="nvarchar" MaxLength="250" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="250" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="250" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="250" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StreamId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EntryTerm" Type="nvarchar" MaxLength="250" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <Association Name="FK_t_RegisterBooks_t_Languages">
           <End Role="t_Languages" Type="Self.t_Languages" Multiplicity="0..1" />
           <End Role="t_RegisterBooks" Type="Self.t_RegisterBooks" Multiplicity="*" />
@@ -71,11 +93,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_t_Students_t_Stream">
+          <End Role="t_Stream" Type="Self.t_Stream" Multiplicity="1" />
+          <End Role="t_Students" Type="Self.t_Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Stream">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_Students">
+              <PropertyRef Name="StreamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="StudentsModelStoreContainer">
           <EntitySet Name="t_Categories" EntityType="Self.t_Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t_Languages" EntityType="Self.t_Languages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t_Publishers" EntityType="Self.t_Publishers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t_RegisterBooks" EntityType="Self.t_RegisterBooks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Stream" EntityType="Self.t_Stream" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Students" EntityType="Self.t_Students" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_t_RegisterBooks_t_Languages" Association="Self.FK_t_RegisterBooks_t_Languages">
             <End Role="t_Languages" EntitySet="t_Languages" />
             <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
@@ -83,6 +119,10 @@
           <AssociationSet Name="FK_t_RegisterBooks_t_Publishers" Association="Self.FK_t_RegisterBooks_t_Publishers">
             <End Role="t_Publishers" EntitySet="t_Publishers" />
             <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_Students_t_Stream" Association="Self.FK_t_Students_t_Stream">
+            <End Role="t_Stream" EntitySet="t_Stream" />
+            <End Role="t_Students" EntitySet="t_Students" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -128,6 +168,12 @@
             <End Role="t_Publishers" EntitySet="t_Publishers" />
             <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
           </AssociationSet>
+          <EntitySet Name="t_Students" EntityType="StudentsModel.t_Students" />
+          <EntitySet Name="t_Stream" EntityType="StudentsModel.t_Stream" />
+          <AssociationSet Name="FK_t_Students_t_Stream" Association="StudentsModel.FK_t_Students_t_Stream">
+            <End Role="t_Stream" EntitySet="t_Stream" />
+            <End Role="t_Students" EntitySet="t_Students" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="t_RegisterBooks">
           <Key>
@@ -170,6 +216,42 @@
             </Principal>
             <Dependent Role="t_RegisterBooks">
               <PropertyRef Name="PublisherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="t_Students">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="AdmNo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ClassName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StreamId" Type="Guid" Nullable="false" />
+          <Property Name="EntryTerm" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="t_Stream" Relationship="StudentsModel.FK_t_Students_t_Stream" FromRole="t_Students" ToRole="t_Stream" />
+        </EntityType>
+        <EntityType Name="t_Stream">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="t_Students" Relationship="StudentsModel.FK_t_Students_t_Stream" FromRole="t_Stream" ToRole="t_Students" />
+        </EntityType>
+        <Association Name="FK_t_Students_t_Stream">
+          <End Type="StudentsModel.t_Stream" Role="t_Stream" Multiplicity="1" />
+          <End Type="StudentsModel.t_Students" Role="t_Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Stream">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_Students">
+              <PropertyRef Name="StreamId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -221,6 +303,30 @@
                 <ScalarProperty Name="BookNo" ColumnName="BookNo" />
                 <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Students">
+            <EntityTypeMapping TypeName="StudentsModel.t_Students">
+              <MappingFragment StoreEntitySet="t_Students">
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="EntryTerm" ColumnName="EntryTerm" />
+                <ScalarProperty Name="StreamId" ColumnName="StreamId" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="AdmNo" ColumnName="AdmNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Stream">
+            <EntityTypeMapping TypeName="StudentsModel.t_Stream">
+              <MappingFragment StoreEntitySet="t_Stream">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

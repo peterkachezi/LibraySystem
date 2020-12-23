@@ -2,14 +2,14 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutNew.cshtml";
-    var categories = ViewBag.Categories as List<BLL.CategoryBLL>;
+    var classes = ViewBag.Classes as List<BLL.StreamBLL>;
 }
 
 <div class="col-md-12 col-sm-12 ">
     <div class="x_panel">
         <div class="x_title">
             <h2>Responsive example<small>Users</small></h2>
-            <a href="/Category/Create/ " class="btn btn-primary">Add</a>
+            <a href="/Stream/Create/ " class="btn btn-primary">Add</a>
             <ul class="nav navbar-right panel_toolbox">
                 <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -39,30 +39,34 @@
                             <thead>
                                 <tr>
                                     <th>SNo.</th>
-                                    <th>Category Name</th>
+                                    <th> Name</th>
+                       
                                     <th>Entry Date</th>
                                     <th>Edit</th>
-                                
+
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (categories != null)
+                                @if (classes != null)
                                 {
                                     int count = 1;
 
-                                    foreach (var category in categories)
+                                    foreach (var clas in classes)
                                     {
 
-                                        <tr>
-                                            <td>@count</td>
+                                <tr>
+                                    <td>@count</td>
 
-                                            <td class="text-capitalize">@category.CategoryName</td>
-                                            <td>@category.CreateDate.ToShortDateString() </td>
-                                            <td>
-                                                <a href="/Category/Edit/@category.Id " class="">Edit</a>
+                                    <td class="text-capitalize">@clas.Name</td>
 
-                                            </td>
-                                        </tr>
+                          
+
+                                    <td>@clas.CreateDate.ToShortDateString() </td>
+                                    <td>
+                                        <a href="/Stream/Edit/@clas.Id " class="">Edit</a>
+
+                                    </td>
+                                </tr>
 
                                         count++;
                                     }
