@@ -32,6 +32,15 @@
                 <div class="col-sm-12">
                     <div class="card-box table-responsive">
                         <p class="text-muted font-13 m-b-30">
+
+                            @if (TempData["Success"] != null)
+                            {
+                                <div class="alert alert-success" role="alert">
+                                    @TempData["Success"]
+                                </div>
+                            }
+                        </p>
+                        <p class="text-muted font-13 m-b-30">
                             Responsive is an extension for DataTables that resolves that problem by optimising the table's layout for different screen sizes through the dynamic insertion and removal of columns from the table.
                         </p>
 
@@ -42,7 +51,7 @@
                                     <th>Category Name</th>
                                     <th>Entry Date</th>
                                     <th>Edit</th>
-                                
+
                                 </tr>
                             </thead>
                             <tbody>

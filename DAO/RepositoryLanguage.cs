@@ -16,13 +16,14 @@ namespace DAO
             {
                 try
                 {
+                 
                     var t_Language = new t_Languages
                     {
                         Id = Guid.NewGuid(),
 
-                        LanguageName = languageBLL.LanguageName,
+                        LanguageName = languageBLL.LanguageName.Substring(0, 1).ToUpper() + languageBLL.LanguageName.Substring(1).ToLower(),
 
-                        CreateDate = DateTime.Now,
+                    CreateDate = DateTime.Now,
                     };
 
                     context.t_Languages.Add(t_Language);
@@ -81,6 +82,10 @@ namespace DAO
                 };
             }
         }
+
+
+
+
 
         public static bool EditLanguage(Guid id, LanguageBLL languageBLL)
         {

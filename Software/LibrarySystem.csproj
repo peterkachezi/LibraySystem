@@ -4960,6 +4960,7 @@
     <Content Include="Views\Stream\Index.cshtml" />
     <Content Include="Views\Student\Create.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Language\GetLanguage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

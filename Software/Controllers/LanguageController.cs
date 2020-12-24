@@ -28,20 +28,39 @@ namespace Software.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(LanguageBLL languageBLL)
+        public ActionResult Create(LanguageBLL languageBLL,string LanguageName)
         {
 
-            var result = RepositoryLanguage.AddLanguage(languageBLL);
-            if (result)
             {
-                TempData["Success"] = "Language added successfully!";
+                var NewLanguageName = LanguageName.Substring(0, 1).ToUpper() + LanguageName.Substring(1).ToLower();
 
-                return RedirectToAction("Index");
+                var language = RepositoryLanguage.GetAllLanguages().Where(x => x.LanguageName == NewLanguageName).FirstOrDefault();
+
+                if (language != null)//exist
+                {
+
+                    TempData["Error"] = "Language already exist!";
+
+                    return RedirectToAction("Create");
+
+                }
+                else if (language == null) //doesnt exist
+
+                {
+                    var result = RepositoryLanguage.AddLanguage(languageBLL);
+
+                    if (result)
+                    {
+                        TempData["Success"] = "Language added successfully!";
+
+                        return RedirectToAction("Index");
+                    }
+
+                    TempData["Error"] = "Failed to add Language. Please try again!";
+
+                }
+                return View();
             }
-
-            TempData["Error"] = "Failed to add Language. Please try again!";
-
-            return View();
         }
 
 
@@ -50,6 +69,7 @@ namespace Software.Controllers
         public ActionResult Edit(Guid Id)
         {
             var language = RepositoryLanguage.GetSingleLanguage(Id);
+
             return View(language);
         }
 
@@ -59,6 +79,7 @@ namespace Software.Controllers
         public ActionResult Edit(Guid id, LanguageBLL languageBLL)
         {
             var results = RepositoryLanguage.EditLanguage(id, languageBLL);
+
             if (results)
             {
                 TempData["Success"] = "Language updated successfully!";
@@ -68,11 +89,12 @@ namespace Software.Controllers
             {
                 TempData["Error"] = "Failed to update facility. Please try again!";
             }
+
             return View(languageBLL);
         }
 
 
-
+     
 
 
 
