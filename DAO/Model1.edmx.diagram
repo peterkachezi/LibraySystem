@@ -14,6 +14,7 @@
         <EntityTypeShape EntityType="StudentsModel.t_Students" Width="1.5" PointX="7.625" PointY="2.625" />
         <EntityTypeShape EntityType="StudentsModel.t_Stream" Width="1.5" PointX="5.375" PointY="4.625" />
         <AssociationConnector Association="StudentsModel.FK_t_Students_t_Stream" />
+        <EntityTypeShape EntityType="StudentsModel.t_Users" Width="1.5" PointX="0.75" PointY="6.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

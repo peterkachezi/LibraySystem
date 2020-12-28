@@ -69,6 +69,21 @@
           <Property Name="EntryTerm" Type="nvarchar" MaxLength="250" />
           <Property Name="EntryDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="t_Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="IsEmailVerified" Type="bit" Nullable="false" />
+          <Property Name="MobileNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ActivationCode" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PasswordResetToken" Type="uniqueidentifier" />
+        </EntityType>
         <Association Name="FK_t_RegisterBooks_t_Languages">
           <End Role="t_Languages" Type="Self.t_Languages" Multiplicity="0..1" />
           <End Role="t_RegisterBooks" Type="Self.t_RegisterBooks" Multiplicity="*" />
@@ -112,6 +127,7 @@
           <EntitySet Name="t_RegisterBooks" EntityType="Self.t_RegisterBooks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t_Stream" EntityType="Self.t_Stream" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t_Students" EntityType="Self.t_Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Users" EntityType="Self.t_Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_t_RegisterBooks_t_Languages" Association="Self.FK_t_RegisterBooks_t_Languages">
             <End Role="t_Languages" EntitySet="t_Languages" />
             <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
@@ -174,6 +190,7 @@
             <End Role="t_Stream" EntitySet="t_Stream" />
             <End Role="t_Students" EntitySet="t_Students" />
           </AssociationSet>
+          <EntitySet Name="t_Users" EntityType="StudentsModel.t_Users" />
           </EntityContainer>
         <EntityType Name="t_RegisterBooks">
           <Key>
@@ -255,6 +272,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="t_Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsEmailVerified" Type="Boolean" Nullable="false" />
+          <Property Name="MobileNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ActivationCode" Type="Guid" Nullable="false" />
+          <Property Name="PasswordResetToken" Type="Guid" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -327,6 +359,22 @@
               <MappingFragment StoreEntitySet="t_Stream">
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Users">
+            <EntityTypeMapping TypeName="StudentsModel.t_Users">
+              <MappingFragment StoreEntitySet="t_Users">
+                <ScalarProperty Name="PasswordResetToken" ColumnName="PasswordResetToken" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

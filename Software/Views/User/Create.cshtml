@@ -1,5 +1,5 @@
 ﻿
-
+@model BLL.StudentBLL
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutNew.cshtml";
@@ -14,7 +14,7 @@
         <div class="col-md-12 col-sm-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Add Language</h2>
+                    <h2>Register Users</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li>
                             <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -40,19 +40,68 @@
                 }
 
 
-
-
                 <div class="x_content">
-                    <form class="" action="/Language/Create" method="post" novalidate>
+                    <form class="" action="/User/Create" method="post" novalidate>
 
 
 
                         <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">Language Name<span class="required">*</span></label>
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">First Name<span class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="text" name="LanguageName" data-validate-linked='email' required='required' />
+                                <input class="form-control" type="text" name="FirstName" data-validate-linked='email' required='required' />
                             </div>
                         </div>
+
+
+
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Last Name <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" name="LastName" data-validate-linked='email' required='required' />
+                            </div>
+                        </div>
+
+
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Email<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" name="EmailID" data-validate-linked='email' required='required' />
+                            </div>
+                            @Html.ValidationMessage("EmailExist", new { @class = "text-danger" })
+                        </div>
+
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Mobile Number<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" name="MobileNumber" data-validate-linked='email' required='required' />
+                            </div>
+                        </div>
+
+
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Password<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" name="Password" data-validate-linked='email' id="Password" onkeyup='check();' required='required' />
+                            </div>
+                        </div>
+
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Confirm Password<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" name="ConfirmPassword" id="ConfirmPassword" data-validate-linked='email' onkeyup='check();' required='required' />
+
+                            </div>
+                        </div>
+
+
+
+
+
 
 
                         <div class="">
@@ -71,9 +120,7 @@
 </div>
 
 
-
 <script src="~/Content/content/vendors/validator/validator.js"></script>
-
 
 <script>
     // initialize a validator instance from the "FormValidator" constructor.

@@ -12,18 +12,17 @@ namespace DAO
     using System;
     using System.Collections.Generic;
     
-    public partial class t_Students
+    public partial class t_Users
     {
         public System.Guid Id { get; set; }
-        public string AdmNo { get; set; }
         public string FirstName { get; set; }
-        public string MiddleName { get; set; }
         public string LastName { get; set; }
-        public string ClassName { get; set; }
-        public System.Guid StreamId { get; set; }
-        public string EntryTerm { get; set; }
-        public System.DateTime EntryDate { get; set; }
-    
-        public virtual t_Stream t_Stream { get; set; }
+        public string EmailID { get; set; }
+        public string Password { get; set; }
+        public System.DateTime CreateDate { get; set; }
+        public bool IsEmailVerified { get; set; }
+        public string MobileNumber { get; set; }
+        public System.Guid ActivationCode { get; set; }
+        public Nullable<System.Guid> PasswordResetToken { get; set; }
     }
 }

@@ -55,6 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HashPassword.cs" />
+    <Compile Include="LoginBLL.cs" />
     <Compile Include="RegisterBookBLL.cs" />
     <Compile Include="CategoryBLL.cs" />
     <Compile Include="LanguageBLL.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="PublisherBLL.cs" />
     <Compile Include="StudentBLL.cs" />
     <Compile Include="StreamBLL.cs" />
+    <Compile Include="UserBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
