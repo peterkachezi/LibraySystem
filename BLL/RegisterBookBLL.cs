@@ -23,6 +23,11 @@ namespace BLL
         public DateTime CreateDate { get; set; }
         public DateTime DeliveryDate { get; set; }
         public System.Guid CategoryId { get; set; }
+        public System.Guid AuthorId { get; set; }
+        public System.Guid LocationId { get; set; }
+        public string AuthorName { get; set; }
+        public string LocationName { get; set; }
+
 
     }
 }

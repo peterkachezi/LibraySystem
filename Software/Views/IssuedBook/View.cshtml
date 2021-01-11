@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Cancel Book Issue</h2>
+
+@model BLL.IssueBookBLL
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+}
+
+
+<div class="">
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <p>Book Details</p>
+                    @*<ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Settings 1</a>
+                                <a class="dropdown-item" href="#">Settings 2</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>*@
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <form class="" action="/IssuedBook/View" method="post" novalidate>
+
+
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Book No <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input type="hidden" class="form-control" value="@Model.Id  " name="id" />
+
+                                <input class="form-control" type="text" value="@Model.BookNo" name="BookNo" data-validate-linked='email' required='required' readonly />
+                            </div>
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Book Title <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" value="@Model.Title " name="Title" data-validate-linked='email' required='required' readonly />
+                            </div>
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">ISBN No<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" value="@Model.ISBN_No " name="Title" data-validate-linked='email' required='required' readonly />
+                            </div>
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Issued Copies <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" value="@Model.IssuedCopies " name="Title" data-validate-linked='email' required='required' readonly />
+                            </div>
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Issued Date <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" value="@Model.IssuedDate" name="SubTitle" data-validate-linked='email' required='required' readonly />
+                            </div>
+                        </div>
+
+
+
+                        <div class="x_title">
+                            <p>Borrower Details</p>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">AdmNo<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" value="@Model.AdmNo" name="SubTitle" data-validate-linked='email' required='required' readonly />
+                            </div>
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Name <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" value="@Model.BorrowerName" name="SubTitle" data-validate-linked='email' required='required' readonly />
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="">
+                            <div class="form-group">
+                                <div class="col-md-6 offset-md-3">
+
+                                    <button type='submit' class="btn btn-danger">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

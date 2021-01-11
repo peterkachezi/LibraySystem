@@ -84,8 +84,6 @@ namespace DAO
             }
         }
 
-
-
         public static UserBLL GetSingleUser(Guid id)
         {
             using (StudentsEntities context = new StudentsEntities())
@@ -142,7 +140,6 @@ namespace DAO
 
             }
         }
-
 
         public static bool ChangePassword(Guid PasswordResetToken, UserBLL userBLL)
         {

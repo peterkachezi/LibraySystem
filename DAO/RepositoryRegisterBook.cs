@@ -11,11 +11,6 @@ namespace DAO
     public class RepositoryRegisterBook
     {
 
-
-
-
-
-
         public static bool AddBook(RegisterBookBLL registerBookBLL)
         {
             using (StudentsEntities context = new StudentsEntities())
@@ -27,8 +22,6 @@ namespace DAO
                         Id = Guid.NewGuid(),
 
                         Title = registerBookBLL.Title,
-
-                        SubTitle = registerBookBLL.SubTitle,
 
                         BookNo = registerBookBLL.BookNo,
 
@@ -49,6 +42,10 @@ namespace DAO
                         DeliveryDate = registerBookBLL.DeliveryDate,
 
                         CategoryId = registerBookBLL.CategoryId,
+
+                        LocationId = registerBookBLL.LocationId,
+
+                        AuthorId = registerBookBLL.AuthorId,
                     };
 
                     context.t_RegisterBooks.Add(t_RegisterBooks);
@@ -80,8 +77,6 @@ namespace DAO
 
                     book.Title = t_RegisterBook.Title;
 
-                    book.SubTitle = t_RegisterBook.SubTitle;
-
                     book.BookNo = t_RegisterBook.BookNo;
 
                     book.LanguageId = (Guid)t_RegisterBook.LanguageId;
@@ -106,6 +101,10 @@ namespace DAO
 
                     book.DeliveryDate = t_RegisterBook.DeliveryDate;
 
+                    book.LocationName = t_RegisterBook.t_Location.Name;
+
+                    book.AuthorName = t_RegisterBook.t_Authors.Name;
+
                     books.Add(book);
                 }
 
@@ -127,8 +126,6 @@ namespace DAO
 
                     Title = t_RegisterBooks.Title,
 
-                    SubTitle = t_RegisterBooks.SubTitle,
-
                     BookNo = t_RegisterBooks.BookNo,
 
                     LanguageId = (Guid)t_RegisterBooks.LanguageId,
@@ -147,7 +144,12 @@ namespace DAO
 
                     DeliveryDate = t_RegisterBooks.DeliveryDate,
 
-                    CategoryId= (Guid)t_RegisterBooks.CategoryId,
+                    CategoryId = (Guid)t_RegisterBooks.CategoryId,
+
+                    AuthorId =(Guid)t_RegisterBooks .AuthorId ,
+
+                    LocationId = (Guid)t_RegisterBooks.LocationId,
+
 
                 };
             }
@@ -164,8 +166,6 @@ namespace DAO
                         var t_RegisterBooks = context.t_RegisterBooks.Find(id);
 
                         t_RegisterBooks.Title = registerBookBLL.Title;
-
-                        t_RegisterBooks.SubTitle = registerBookBLL.SubTitle;
 
                         t_RegisterBooks.BookNo = registerBookBLL.BookNo;
 

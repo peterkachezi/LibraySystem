@@ -1,0 +1,185 @@
+﻿
+@{
+    ViewBag.Title = "ReturnBook";
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+}
+
+<h2>Return Book</h2>
+
+<div class="">
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>View Details</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Settings 1</a>
+                                <a class="dropdown-item" href="#">Settings 2</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                @*@if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @TempData["Error"]
+                        </div>
+                    }*@
+                <div class="x_content">
+                    <form method="post" action="/IssuedBook/ReturnBook">
+
+
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Enter Book No <span class="required">*</span></label>
+                            <div class="col-md-offset-3 col-sm-6">
+                                <input class="form-control" type="text" id="BookNo" name="BookNo" data-validate-linked='email' required='required' />
+                            </div>
+
+                            <button type='button' id="btn-getdata" class="btn btn-success">Get Book</button>
+                        </div>
+
+
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Book No <span></span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" value="" name="BookNo" data-validate-linked='email' required='required' readonly />
+                                <input class="form-control" type="hidden" value="" name="BookId" data-validate-linked='email' required='required' readonly />
+                            </div>
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Title <span></span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" name="Title" data-validate-linked='email' required='required' readonly />
+                            </div>
+                        </div>
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Issued Copies <span></span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" name="ReturnedCopies" data-validate-linked='email' required='required' readonly />
+                            </div>
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">ISBN No <span></span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" name="ISBN_No" data-validate-linked='email' required='required' readonly />
+                            </div>
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Issued To <span></span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="hidden" name="BorrowerId" data-validate-linked='email' required='required' readonly />
+
+                                <input class="form-control" type="text" name="BorrowerName" data-validate-linked='email' required='required' readonly />
+                            </div>
+                        </div>
+                        
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Book Status<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <select id="heard" class="form-control" name="ReturnStatus" required>
+                                    <option value="">Choose..</option>
+                                    <option value="Good">Good</option>
+                                    <option value="Damaged">Damaged</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                        <div class="">
+                            <div class="form-group">
+                                <div class="col-md-6 offset-md-3">
+                                    <button type='submit' class="btn btn-primary">Submit</button>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Content/content/vendors/validator/validator.js"></script>
+
+
+<script>
+    // initialize a validator instance from the "FormValidator" constructor.
+    // A "<form>" element is optionally passed as an argument, but is not a must
+    var validator = new FormValidator({
+        "events": ['blur', 'input', 'change']
+    }, document.forms[0]);
+    // on form "submit" event
+    document.forms[0].onsubmit = function (e) {
+        var submit = true,
+            validatorResult = validator.checkAll(this);
+        console.log(validatorResult);
+        return !!validatorResult.valid;
+    };
+    // on form "reset" event
+    document.forms[0].onreset = function (e) {
+        validator.reset();
+    };
+    // stuff related ONLY for this demo page:
+    $('.toggleValidationTooltips').change(function () {
+        validator.settings.alerts = !this.checked;
+        if (this.checked)
+            $('form .alert').remove();
+    }).prop('checked', false);
+
+
+
+
+    $("#btn-getdata").click(function () {
+        $.get("/IssuedBook/GetBook?BookNo=" + $("#BookNo").val(), function (data, status) {
+            if (data == null) {
+                alert("Does not exist");
+            } else {
+                $("input[name='BookNo']").val(data.BookNo);
+                $("input[name='ReturnedCopies']").val(data.IssuedCopies);
+                $("input[name='Title']").val(data.Title);
+                $("input[name='ISBN_No']").val(data.ISBN_No);
+                $("input[name='BorrowerName']").val(data.BorrowerName);
+                $("input[name='BorrowerId']").val(data.BorrowerId);
+                $("input[name='BookId']").val(data.BookId);
+                
+            }
+        });
+    });
+
+
+</script>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,24 +9,20 @@ namespace Software.Controllers
 {
     public class HomeController : Controller
     {
-       // [Authorize]
+        StudentsEntities db = new StudentsEntities();
+        // [Authorize]
         public ActionResult Index()
         {
-            return View();
-        }
+            ViewBag.Count = RepositoryRegisterBook.GetAllBooks().Count;
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.IssuedBooks = RepositoryIssueBook.IssuedBooks().Count;
 
-            return View();
-        }
+            ViewBag.IssuedBooks = RepositoryIssueBook.IssuedBooks().Count;
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+
 
             return View();
         }
+
     }
 }

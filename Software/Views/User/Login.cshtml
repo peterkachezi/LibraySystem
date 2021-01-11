@@ -29,16 +29,33 @@
         <div class="login_wrapper">
             <div class="animate form login_form">
                 <section class="login_content">
-                    <form>
+                    <p class="text-muted font-13 m-b-30">
+
+                 
+
+                        @if (TempData["Error"] != null)
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                @TempData["Error"]
+                            </div>
+                        }
+
+
+                    </p>
+
+
+
+                    <form method="post" action="/User/Login">
                         <h1>Login Form</h1>
                         <div>
                             <input type="text" class="form-control" placeholder="Email Address" name="EmailID" required="" />
                         </div>
                         <div>
-                            <input type="password" class="form-control" placeholder="Password" name="Password"   required="" />
+                            <input type="password" class="form-control" placeholder="Password" name="Password" required="" />
                         </div>
                         <div>
-                            <a class="btn btn-default submit" href="index.html">Log in</a>
+
+                            <button type='submit' class="btn btn-default">Log in</button>
                             <a class="reset_pass" href="/User/ForgotPassword">Lost your password?</a>
                         </div>
 
@@ -52,10 +69,13 @@
 
                             <div class="clearfix"></div>
                             <br />
+                            <br />
+                            <br />
+                            <br />
 
                             <div>
                                 <h1><i class="fa fa-paw"></i> ebook | Library</h1>
-                 
+
                             </div>
                             <div>
                                 &copy;
@@ -110,16 +130,3 @@
 </body>
 </html>
 
-<style>
-    footer {
-        background: #fff;
-        padding: 10px 20px;
-        display: block;
-        visibility: hidden;
-    }
-
-    .navbar-header {
-        background: #34495E;
-        visibility: hidden;
-    }
-</style>

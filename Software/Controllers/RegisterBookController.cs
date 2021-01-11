@@ -25,14 +25,16 @@ namespace Software.Controllers
         public ActionResult Create()
         {
             //get languages and publishers to dropdown
-            var languages = RepositoryLanguage.GetAllLanguages();
-            ViewBag.Languages = languages;
+          
+            ViewBag.Languages = RepositoryLanguage.GetAllLanguages();
+                     
+            ViewBag.Publishers = RepositoryPublisher.GetAllPublishers();
+                     
+            ViewBag.Categories = RepositoryCategory.GetAllCategories();
 
-            var publishers = RepositoryPublisher.GetAllPublishers();
-            ViewBag.Publishers = publishers;
+            ViewBag.Authors = RepositoryAuthor.GetAllAuthors();
 
-            var categories = RepositoryCategory.GetAllCategories();
-            ViewBag.Categories = categories;
+            ViewBag.Locations = RepositoryLocation.GetAllLocation();
 
             // end
             return View();

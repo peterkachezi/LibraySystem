@@ -14,9 +14,16 @@ namespace DAO
     
     public partial class t_RegisterBooks
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public t_RegisterBooks()
+        {
+            this.t_IssuedBooks = new HashSet<t_IssuedBooks>();
+            this.t_LostBooks = new HashSet<t_LostBooks>();
+            this.t_ReturnedBooks = new HashSet<t_ReturnedBooks>();
+        }
+    
         public System.Guid Id { get; set; }
         public string Title { get; set; }
-        public string SubTitle { get; set; }
         public string BookNo { get; set; }
         public Nullable<System.Guid> LanguageId { get; set; }
         public string ISBN_No { get; set; }
@@ -27,8 +34,20 @@ namespace DAO
         public System.DateTime CreateDate { get; set; }
         public System.DateTime DeliveryDate { get; set; }
         public Nullable<System.Guid> CategoryId { get; set; }
+        public string BarCode { get; set; }
+        public string Pages { get; set; }
+        public Nullable<System.Guid> AuthorId { get; set; }
+        public Nullable<System.Guid> LocationId { get; set; }
     
+        public virtual t_Authors t_Authors { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<t_IssuedBooks> t_IssuedBooks { get; set; }
         public virtual t_Languages t_Languages { get; set; }
+        public virtual t_Location t_Location { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<t_LostBooks> t_LostBooks { get; set; }
         public virtual t_Publishers t_Publishers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<t_ReturnedBooks> t_ReturnedBooks { get; set; }
     }
 }

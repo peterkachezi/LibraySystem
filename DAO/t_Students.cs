@@ -14,6 +14,13 @@ namespace DAO
     
     public partial class t_Students
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public t_Students()
+        {
+            this.t_IssuedBooks = new HashSet<t_IssuedBooks>();
+            this.t_LostBooks = new HashSet<t_LostBooks>();
+        }
+    
         public System.Guid Id { get; set; }
         public string AdmNo { get; set; }
         public string FirstName { get; set; }
@@ -24,6 +31,10 @@ namespace DAO
         public string EntryTerm { get; set; }
         public System.DateTime EntryDate { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<t_IssuedBooks> t_IssuedBooks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<t_LostBooks> t_LostBooks { get; set; }
         public virtual t_Stream t_Stream { get; set; }
     }
 }

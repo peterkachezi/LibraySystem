@@ -45,11 +45,20 @@
                         </div>
 
                         <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">Sub Title <span class="required">*</span></label>
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Author<span class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="text" name="SubTitle" data-validate-linked='email' required='required' />
+                                <select id="heard" class="form-control" name="AuthorId" required>
+                                    @if (ViewBag.Authors != null)
+                                    {
+                                        foreach (var author in ViewBag.Authors)
+                                        {
+                                            <option value="@author.Id"> @author.Name</option>
+                                        }
+                                    }
+                                </select>
                             </div>
                         </div>
+
 
 
                         <div class="field item form-group">
@@ -90,6 +99,21 @@
                             <label class="col-form-label col-md-3 col-sm-3  label-align">Edition <span class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
                                 <input class="form-control" type="text" name="Edition" data-validate-linked='email' required='required' />
+                            </div>
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Location<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <select id="heard" class="form-control" name="LocationId" required>
+                                    @if (ViewBag.Locations != null)
+                                    {
+                                        foreach (var location in ViewBag.Locations)
+                                        {
+                                            <option value="@location.Id"> @location.Name</option>
+                                        }
+                                    }
+                                </select>
                             </div>
                         </div>
 

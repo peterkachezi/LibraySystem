@@ -5,6 +5,24 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="StudentsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="t_Authors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Createdby_Id" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="t_Bulk">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="250" />
+          <Property Name="LastName" Type="varchar" MaxLength="250" />
+          <Property Name="Age" Type="varchar" MaxLength="250" />
+        </EntityType>
         <EntityType Name="t_Categories">
           <Key>
             <PropertyRef Name="Id" />
@@ -13,6 +31,35 @@
           <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="t_Instituiton">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SchoolName" Type="nvarchar" MaxLength="250" />
+          <Property Name="MobileNumber" Type="nvarchar" MaxLength="250" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="Website" Type="nvarchar" MaxLength="250" />
+          <Property Name="County" Type="nvarchar" MaxLength="250" />
+          <Property Name="Town" Type="nvarchar" MaxLength="250" />
+          <Property Name="PostalAddress" Type="nvarchar" MaxLength="250" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="SchoolType" Type="nvarchar" MaxLength="250" />
+          <Property Name="Createdby_Id" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="t_IssuedBooks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BorrowerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BookId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BookNo" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="IssuedCopies" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="IssuedDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="tinyint" Nullable="false" />
+        </EntityType>
         <EntityType Name="t_Languages">
           <Key>
             <PropertyRef Name="Id" />
@@ -20,6 +67,27 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="LanguageName" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_Location">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Createdby_Id" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="t_LostBooks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BookId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BorrowerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BookNo" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="DateReported" Type="datetime" Nullable="false" />
+          <Property Name="ReportedBy_Id" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="t_Publishers">
           <Key>
@@ -35,7 +103,6 @@
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="250" />
-          <Property Name="SubTitle" Type="nvarchar" MaxLength="250" />
           <Property Name="BookNo" Type="nvarchar" MaxLength="250" />
           <Property Name="LanguageId" Type="uniqueidentifier" />
           <Property Name="ISBN_No" Type="nvarchar" MaxLength="250" />
@@ -46,6 +113,22 @@
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="DeliveryDate" Type="datetime" Nullable="false" />
           <Property Name="CategoryId" Type="uniqueidentifier" />
+          <Property Name="BarCode" Type="nvarchar" MaxLength="250" />
+          <Property Name="Pages" Type="nvarchar" MaxLength="250" />
+          <Property Name="AuthorId" Type="uniqueidentifier" />
+          <Property Name="LocationId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="t_ReturnedBooks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BorrowerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BookId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BookNo" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ReturnedCopies" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ReturnedDate" Type="datetime" Nullable="false" />
+          <Property Name="ReturnedStatus" Type="nvarchar" MaxLength="250" Nullable="false" />
         </EntityType>
         <EntityType Name="t_Stream">
           <Key>
@@ -69,6 +152,14 @@
           <Property Name="EntryTerm" Type="nvarchar" MaxLength="250" />
           <Property Name="EntryDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="t_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="t_Users">
           <Key>
             <PropertyRef Name="Id" />
@@ -84,6 +175,80 @@
           <Property Name="ActivationCode" Type="uniqueidentifier" Nullable="false" />
           <Property Name="PasswordResetToken" Type="uniqueidentifier" />
         </EntityType>
+        <EntityType Name="t_Vendors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="MobileNumber" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="250" />
+          <Property Name="Website" Type="nvarchar" MaxLength="250" />
+          <Property Name="PostalAddress" Type="nvarchar" MaxLength="250" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Createdby_Id" Type="uniqueidentifier" />
+        </EntityType>
+        <Association Name="FK_t_IssuedBooks_t_RegisterBooks">
+          <End Role="t_RegisterBooks" Type="Self.t_RegisterBooks" Multiplicity="1" />
+          <End Role="t_IssuedBooks" Type="Self.t_IssuedBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_RegisterBooks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_IssuedBooks">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_t_IssuedBooks_t_Students">
+          <End Role="t_Students" Type="Self.t_Students" Multiplicity="1" />
+          <End Role="t_IssuedBooks" Type="Self.t_IssuedBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_IssuedBooks">
+              <PropertyRef Name="BorrowerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_t_LostBooks_t_RegisterBooks">
+          <End Role="t_RegisterBooks" Type="Self.t_RegisterBooks" Multiplicity="1" />
+          <End Role="t_LostBooks" Type="Self.t_LostBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_RegisterBooks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_LostBooks">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_t_LostBooks_t_Students">
+          <End Role="t_Students" Type="Self.t_Students" Multiplicity="1" />
+          <End Role="t_LostBooks" Type="Self.t_LostBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_LostBooks">
+              <PropertyRef Name="BorrowerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_t_RegisterBooks_t_Authors">
+          <End Role="t_Authors" Type="Self.t_Authors" Multiplicity="0..1" />
+          <End Role="t_RegisterBooks" Type="Self.t_RegisterBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Authors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_RegisterBooks">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_t_RegisterBooks_t_Languages">
           <End Role="t_Languages" Type="Self.t_Languages" Multiplicity="0..1" />
           <End Role="t_RegisterBooks" Type="Self.t_RegisterBooks" Multiplicity="*" />
@@ -96,6 +261,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_t_RegisterBooks_t_Location">
+          <End Role="t_Location" Type="Self.t_Location" Multiplicity="0..1" />
+          <End Role="t_RegisterBooks" Type="Self.t_RegisterBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_RegisterBooks">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_t_RegisterBooks_t_Publishers">
           <End Role="t_Publishers" Type="Self.t_Publishers" Multiplicity="0..1" />
           <End Role="t_RegisterBooks" Type="Self.t_RegisterBooks" Multiplicity="*" />
@@ -105,6 +282,18 @@
             </Principal>
             <Dependent Role="t_RegisterBooks">
               <PropertyRef Name="PublisherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_t_ReturnedBooks_t_RegisterBooks">
+          <End Role="t_RegisterBooks" Type="Self.t_RegisterBooks" Multiplicity="1" />
+          <End Role="t_ReturnedBooks" Type="Self.t_ReturnedBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_RegisterBooks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_ReturnedBooks">
+              <PropertyRef Name="BookId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -121,20 +310,57 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="StudentsModelStoreContainer">
+          <EntitySet Name="t_Authors" EntityType="Self.t_Authors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Bulk" EntityType="Self.t_Bulk" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t_Categories" EntityType="Self.t_Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Instituiton" EntityType="Self.t_Instituiton" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_IssuedBooks" EntityType="Self.t_IssuedBooks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t_Languages" EntityType="Self.t_Languages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Location" EntityType="Self.t_Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_LostBooks" EntityType="Self.t_LostBooks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t_Publishers" EntityType="Self.t_Publishers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t_RegisterBooks" EntityType="Self.t_RegisterBooks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_ReturnedBooks" EntityType="Self.t_ReturnedBooks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t_Stream" EntityType="Self.t_Stream" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t_Students" EntityType="Self.t_Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_User" EntityType="Self.t_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t_Users" EntityType="Self.t_Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t_Vendors" EntityType="Self.t_Vendors" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_t_IssuedBooks_t_RegisterBooks" Association="Self.FK_t_IssuedBooks_t_RegisterBooks">
+            <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
+            <End Role="t_IssuedBooks" EntitySet="t_IssuedBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_IssuedBooks_t_Students" Association="Self.FK_t_IssuedBooks_t_Students">
+            <End Role="t_Students" EntitySet="t_Students" />
+            <End Role="t_IssuedBooks" EntitySet="t_IssuedBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_LostBooks_t_RegisterBooks" Association="Self.FK_t_LostBooks_t_RegisterBooks">
+            <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
+            <End Role="t_LostBooks" EntitySet="t_LostBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_LostBooks_t_Students" Association="Self.FK_t_LostBooks_t_Students">
+            <End Role="t_Students" EntitySet="t_Students" />
+            <End Role="t_LostBooks" EntitySet="t_LostBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_RegisterBooks_t_Authors" Association="Self.FK_t_RegisterBooks_t_Authors">
+            <End Role="t_Authors" EntitySet="t_Authors" />
+            <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
+          </AssociationSet>
           <AssociationSet Name="FK_t_RegisterBooks_t_Languages" Association="Self.FK_t_RegisterBooks_t_Languages">
             <End Role="t_Languages" EntitySet="t_Languages" />
+            <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_RegisterBooks_t_Location" Association="Self.FK_t_RegisterBooks_t_Location">
+            <End Role="t_Location" EntitySet="t_Location" />
             <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
           </AssociationSet>
           <AssociationSet Name="FK_t_RegisterBooks_t_Publishers" Association="Self.FK_t_RegisterBooks_t_Publishers">
             <End Role="t_Publishers" EntitySet="t_Publishers" />
             <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_ReturnedBooks_t_RegisterBooks" Association="Self.FK_t_ReturnedBooks_t_RegisterBooks">
+            <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
+            <End Role="t_ReturnedBooks" EntitySet="t_ReturnedBooks" />
           </AssociationSet>
           <AssociationSet Name="FK_t_Students_t_Stream" Association="Self.FK_t_Students_t_Stream">
             <End Role="t_Stream" EntitySet="t_Stream" />
@@ -145,6 +371,73 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="StudentsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="StudentsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="t_Bulk" EntityType="StudentsModel.t_Bulk" />
+          <EntitySet Name="t_Categories" EntityType="StudentsModel.t_Categories" />
+          <EntitySet Name="t_Instituiton" EntityType="StudentsModel.t_Instituiton" />
+          <EntitySet Name="t_IssuedBooks" EntityType="StudentsModel.t_IssuedBooks" />
+          <EntitySet Name="t_Languages" EntityType="StudentsModel.t_Languages" />
+          <EntitySet Name="t_LostBooks" EntityType="StudentsModel.t_LostBooks" />
+          <EntitySet Name="t_Publishers" EntityType="StudentsModel.t_Publishers" />
+          <EntitySet Name="t_ReturnedBooks" EntityType="StudentsModel.t_ReturnedBooks" />
+          <EntitySet Name="t_Stream" EntityType="StudentsModel.t_Stream" />
+          <EntitySet Name="t_Students" EntityType="StudentsModel.t_Students" />
+          <EntitySet Name="t_User" EntityType="StudentsModel.t_User" />
+          <EntitySet Name="t_Users" EntityType="StudentsModel.t_Users" />
+          <AssociationSet Name="FK_t_IssuedBooks_t_Students" Association="StudentsModel.FK_t_IssuedBooks_t_Students">
+            <End Role="t_Students" EntitySet="t_Students" />
+            <End Role="t_IssuedBooks" EntitySet="t_IssuedBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_LostBooks_t_Students" Association="StudentsModel.FK_t_LostBooks_t_Students">
+            <End Role="t_Students" EntitySet="t_Students" />
+            <End Role="t_LostBooks" EntitySet="t_LostBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_Students_t_Stream" Association="StudentsModel.FK_t_Students_t_Stream">
+            <End Role="t_Stream" EntitySet="t_Stream" />
+            <End Role="t_Students" EntitySet="t_Students" />
+          </AssociationSet>
+          <EntitySet Name="t_Location" EntityType="StudentsModel.t_Location" />
+          <EntitySet Name="t_Authors" EntityType="StudentsModel.t_Authors" />
+          <EntitySet Name="t_Vendors" EntityType="StudentsModel.t_Vendors" />
+          <EntitySet Name="t_RegisterBooks" EntityType="StudentsModel.t_RegisterBooks" />
+          <AssociationSet Name="FK_t_RegisterBooks_t_Authors" Association="StudentsModel.FK_t_RegisterBooks_t_Authors">
+            <End Role="t_Authors" EntitySet="t_Authors" />
+            <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_IssuedBooks_t_RegisterBooks" Association="StudentsModel.FK_t_IssuedBooks_t_RegisterBooks">
+            <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
+            <End Role="t_IssuedBooks" EntitySet="t_IssuedBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_RegisterBooks_t_Languages" Association="StudentsModel.FK_t_RegisterBooks_t_Languages">
+            <End Role="t_Languages" EntitySet="t_Languages" />
+            <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_RegisterBooks_t_Location" Association="StudentsModel.FK_t_RegisterBooks_t_Location">
+            <End Role="t_Location" EntitySet="t_Location" />
+            <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_LostBooks_t_RegisterBooks" Association="StudentsModel.FK_t_LostBooks_t_RegisterBooks">
+            <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
+            <End Role="t_LostBooks" EntitySet="t_LostBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_RegisterBooks_t_Publishers" Association="StudentsModel.FK_t_RegisterBooks_t_Publishers">
+            <End Role="t_Publishers" EntitySet="t_Publishers" />
+            <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_ReturnedBooks_t_RegisterBooks" Association="StudentsModel.FK_t_ReturnedBooks_t_RegisterBooks">
+            <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
+            <End Role="t_ReturnedBooks" EntitySet="t_ReturnedBooks" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="t_Bulk">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="t_Categories">
           <Key>
             <PropertyRef Name="Id" />
@@ -153,89 +446,90 @@
           <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="t_Instituiton">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="SchoolName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="County" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Town" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PostalAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SchoolType" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Createdby_Id" Type="Guid" />
+        </EntityType>
+        <EntityType Name="t_IssuedBooks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="BorrowerId" Type="Guid" Nullable="false" />
+          <Property Name="BookId" Type="Guid" Nullable="false" />
+          <Property Name="BookNo" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IssuedCopies" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IssuedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="t_Students" Relationship="StudentsModel.FK_t_IssuedBooks_t_Students" FromRole="t_IssuedBooks" ToRole="t_Students" />
+          <NavigationProperty Name="t_RegisterBooks" Relationship="StudentsModel.FK_t_IssuedBooks_t_RegisterBooks" FromRole="t_IssuedBooks" ToRole="t_RegisterBooks" />
+        </EntityType>
         <EntityType Name="t_Languages">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="LanguageName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LanguageName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="t_RegisterBooks" Relationship="StudentsModel.FK_t_RegisterBooks_t_Languages" FromRole="t_Languages" ToRole="t_RegisterBooks" />
+        </EntityType>
+        <EntityType Name="t_LostBooks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="BookId" Type="Guid" Nullable="false" />
+          <Property Name="BorrowerId" Type="Guid" Nullable="false" />
+          <Property Name="BookNo" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DateReported" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReportedBy_Id" Type="Guid" />
+          <NavigationProperty Name="t_Students" Relationship="StudentsModel.FK_t_LostBooks_t_Students" FromRole="t_LostBooks" ToRole="t_Students" />
+          <NavigationProperty Name="t_RegisterBooks" Relationship="StudentsModel.FK_t_LostBooks_t_RegisterBooks" FromRole="t_LostBooks" ToRole="t_RegisterBooks" />
         </EntityType>
         <EntityType Name="t_Publishers">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="t_RegisterBooks" Relationship="StudentsModel.FK_t_RegisterBooks_t_Publishers" FromRole="t_Publishers" ToRole="t_RegisterBooks" />
         </EntityType>
-        <EntityContainer Name="StudentsEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="t_Categories" EntityType="Self.t_Categories" />
-          <EntitySet Name="t_Languages" EntityType="Self.t_Languages" />
-          <EntitySet Name="t_Publishers" EntityType="Self.t_Publishers" />
-          <EntitySet Name="t_RegisterBooks" EntityType="StudentsModel.t_RegisterBooks" />
-          <AssociationSet Name="FK_t_RegisterBooks_t_Languages" Association="StudentsModel.FK_t_RegisterBooks_t_Languages">
-            <End Role="t_Languages" EntitySet="t_Languages" />
-            <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_t_RegisterBooks_t_Publishers" Association="StudentsModel.FK_t_RegisterBooks_t_Publishers">
-            <End Role="t_Publishers" EntitySet="t_Publishers" />
-            <End Role="t_RegisterBooks" EntitySet="t_RegisterBooks" />
-          </AssociationSet>
-          <EntitySet Name="t_Students" EntityType="StudentsModel.t_Students" />
-          <EntitySet Name="t_Stream" EntityType="StudentsModel.t_Stream" />
-          <AssociationSet Name="FK_t_Students_t_Stream" Association="StudentsModel.FK_t_Students_t_Stream">
-            <End Role="t_Stream" EntitySet="t_Stream" />
-            <End Role="t_Students" EntitySet="t_Students" />
-          </AssociationSet>
-          <EntitySet Name="t_Users" EntityType="StudentsModel.t_Users" />
-          </EntityContainer>
-        <EntityType Name="t_RegisterBooks">
+        <EntityType Name="t_ReturnedBooks">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="SubTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="BookNo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="LanguageId" Type="Guid" />
-          <Property Name="ISBN_No" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Edition" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Copies" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="PublisherId" Type="Guid" />
-          <Property Name="PublishedYear" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeliveryDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CategoryId" Type="Guid" />
-          <NavigationProperty Name="t_Languages" Relationship="StudentsModel.FK_t_RegisterBooks_t_Languages" FromRole="t_RegisterBooks" ToRole="t_Languages" />
-          <NavigationProperty Name="t_Publishers" Relationship="StudentsModel.FK_t_RegisterBooks_t_Publishers" FromRole="t_RegisterBooks" ToRole="t_Publishers" />
+          <Property Name="BorrowerId" Type="Guid" Nullable="false" />
+          <Property Name="BookId" Type="Guid" Nullable="false" />
+          <Property Name="BookNo" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ReturnedCopies" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ReturnedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReturnedStatus" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="t_RegisterBooks" Relationship="StudentsModel.FK_t_ReturnedBooks_t_RegisterBooks" FromRole="t_ReturnedBooks" ToRole="t_RegisterBooks" />
         </EntityType>
-        <Association Name="FK_t_RegisterBooks_t_Languages">
-          <End Type="StudentsModel.t_Languages" Role="t_Languages" Multiplicity="0..1" />
-          <End Type="StudentsModel.t_RegisterBooks" Role="t_RegisterBooks" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="t_Languages">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="t_RegisterBooks">
-              <PropertyRef Name="LanguageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_t_RegisterBooks_t_Publishers">
-          <End Type="StudentsModel.t_Publishers" Role="t_Publishers" Multiplicity="0..1" />
-          <End Type="StudentsModel.t_RegisterBooks" Role="t_RegisterBooks" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="t_Publishers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="t_RegisterBooks">
-              <PropertyRef Name="PublisherId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="t_Stream">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="t_Students" Relationship="StudentsModel.FK_t_Students_t_Stream" FromRole="t_Stream" ToRole="t_Students" />
+        </EntityType>
         <EntityType Name="t_Students">
           <Key>
             <PropertyRef Name="Id" />
@@ -249,29 +543,18 @@
           <Property Name="StreamId" Type="Guid" Nullable="false" />
           <Property Name="EntryTerm" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="t_IssuedBooks" Relationship="StudentsModel.FK_t_IssuedBooks_t_Students" FromRole="t_Students" ToRole="t_IssuedBooks" />
+          <NavigationProperty Name="t_LostBooks" Relationship="StudentsModel.FK_t_LostBooks_t_Students" FromRole="t_Students" ToRole="t_LostBooks" />
           <NavigationProperty Name="t_Stream" Relationship="StudentsModel.FK_t_Students_t_Stream" FromRole="t_Students" ToRole="t_Stream" />
         </EntityType>
-        <EntityType Name="t_Stream">
+        <EntityType Name="t_User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="t_Students" Relationship="StudentsModel.FK_t_Students_t_Stream" FromRole="t_Stream" ToRole="t_Students" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="FK_t_Students_t_Stream">
-          <End Type="StudentsModel.t_Stream" Role="t_Stream" Multiplicity="1" />
-          <End Type="StudentsModel.t_Students" Role="t_Students" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="t_Stream">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="t_Students">
-              <PropertyRef Name="StreamId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="t_Users">
           <Key>
             <PropertyRef Name="Id" />
@@ -287,54 +570,293 @@
           <Property Name="ActivationCode" Type="Guid" Nullable="false" />
           <Property Name="PasswordResetToken" Type="Guid" />
         </EntityType>
+        <Association Name="FK_t_IssuedBooks_t_Students">
+          <End Type="StudentsModel.t_Students" Role="t_Students" Multiplicity="1" />
+          <End Type="StudentsModel.t_IssuedBooks" Role="t_IssuedBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_IssuedBooks">
+              <PropertyRef Name="BorrowerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_t_LostBooks_t_Students">
+          <End Type="StudentsModel.t_Students" Role="t_Students" Multiplicity="1" />
+          <End Type="StudentsModel.t_LostBooks" Role="t_LostBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_LostBooks">
+              <PropertyRef Name="BorrowerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_t_Students_t_Stream">
+          <End Type="StudentsModel.t_Stream" Role="t_Stream" Multiplicity="1" />
+          <End Type="StudentsModel.t_Students" Role="t_Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Stream">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_Students">
+              <PropertyRef Name="StreamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="t_Location">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Createdby_Id" Type="Guid" />
+          <NavigationProperty Name="t_RegisterBooks" Relationship="StudentsModel.FK_t_RegisterBooks_t_Location" FromRole="t_Location" ToRole="t_RegisterBooks" />
+        </EntityType>
+        <EntityType Name="t_Authors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Createdby_Id" Type="Guid" />
+          <NavigationProperty Name="t_RegisterBooks" Relationship="StudentsModel.FK_t_RegisterBooks_t_Authors" FromRole="t_Authors" ToRole="t_RegisterBooks" />
+        </EntityType>
+        <EntityType Name="t_Vendors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PostalAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Createdby_Id" Type="Guid" />
+        </EntityType>
+        <EntityType Name="t_RegisterBooks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="BookNo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LanguageId" Type="Guid" />
+          <Property Name="ISBN_No" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Edition" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Copies" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PublisherId" Type="Guid" />
+          <Property Name="PublishedYear" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeliveryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CategoryId" Type="Guid" />
+          <Property Name="BarCode" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Pages" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AuthorId" Type="Guid" />
+          <Property Name="LocationId" Type="Guid" />
+          <NavigationProperty Name="t_Authors" Relationship="StudentsModel.FK_t_RegisterBooks_t_Authors" FromRole="t_RegisterBooks" ToRole="t_Authors" />
+          <NavigationProperty Name="t_IssuedBooks" Relationship="StudentsModel.FK_t_IssuedBooks_t_RegisterBooks" FromRole="t_RegisterBooks" ToRole="t_IssuedBooks" />
+          <NavigationProperty Name="t_Languages" Relationship="StudentsModel.FK_t_RegisterBooks_t_Languages" FromRole="t_RegisterBooks" ToRole="t_Languages" />
+          <NavigationProperty Name="t_Location" Relationship="StudentsModel.FK_t_RegisterBooks_t_Location" FromRole="t_RegisterBooks" ToRole="t_Location" />
+          <NavigationProperty Name="t_LostBooks" Relationship="StudentsModel.FK_t_LostBooks_t_RegisterBooks" FromRole="t_RegisterBooks" ToRole="t_LostBooks" />
+          <NavigationProperty Name="t_Publishers" Relationship="StudentsModel.FK_t_RegisterBooks_t_Publishers" FromRole="t_RegisterBooks" ToRole="t_Publishers" />
+          <NavigationProperty Name="t_ReturnedBooks" Relationship="StudentsModel.FK_t_ReturnedBooks_t_RegisterBooks" FromRole="t_RegisterBooks" ToRole="t_ReturnedBooks" />
+        </EntityType>
+        <Association Name="FK_t_RegisterBooks_t_Authors">
+          <End Type="StudentsModel.t_Authors" Role="t_Authors" Multiplicity="0..1" />
+          <End Type="StudentsModel.t_RegisterBooks" Role="t_RegisterBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Authors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_RegisterBooks">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_t_IssuedBooks_t_RegisterBooks">
+          <End Type="StudentsModel.t_RegisterBooks" Role="t_RegisterBooks" Multiplicity="1" />
+          <End Type="StudentsModel.t_IssuedBooks" Role="t_IssuedBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_RegisterBooks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_IssuedBooks">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_t_RegisterBooks_t_Languages">
+          <End Type="StudentsModel.t_Languages" Role="t_Languages" Multiplicity="0..1" />
+          <End Type="StudentsModel.t_RegisterBooks" Role="t_RegisterBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Languages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_RegisterBooks">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_t_RegisterBooks_t_Location">
+          <End Type="StudentsModel.t_Location" Role="t_Location" Multiplicity="0..1" />
+          <End Type="StudentsModel.t_RegisterBooks" Role="t_RegisterBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_RegisterBooks">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_t_LostBooks_t_RegisterBooks">
+          <End Type="StudentsModel.t_RegisterBooks" Role="t_RegisterBooks" Multiplicity="1" />
+          <End Type="StudentsModel.t_LostBooks" Role="t_LostBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_RegisterBooks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_LostBooks">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_t_RegisterBooks_t_Publishers">
+          <End Type="StudentsModel.t_Publishers" Role="t_Publishers" Multiplicity="0..1" />
+          <End Type="StudentsModel.t_RegisterBooks" Role="t_RegisterBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Publishers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_RegisterBooks">
+              <PropertyRef Name="PublisherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_t_ReturnedBooks_t_RegisterBooks">
+          <End Type="StudentsModel.t_RegisterBooks" Role="t_RegisterBooks" Multiplicity="1" />
+          <End Type="StudentsModel.t_ReturnedBooks" Role="t_ReturnedBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_RegisterBooks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="t_ReturnedBooks">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="StudentsModelStoreContainer" CdmEntityContainer="StudentsEntities">
+          <EntitySetMapping Name="t_Bulk">
+            <EntityTypeMapping TypeName="StudentsModel.t_Bulk">
+              <MappingFragment StoreEntitySet="t_Bulk">
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="t_Categories">
             <EntityTypeMapping TypeName="StudentsModel.t_Categories">
               <MappingFragment StoreEntitySet="t_Categories">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Instituiton">
+            <EntityTypeMapping TypeName="StudentsModel.t_Instituiton">
+              <MappingFragment StoreEntitySet="t_Instituiton">
+                <ScalarProperty Name="Createdby_Id" ColumnName="Createdby_Id" />
+                <ScalarProperty Name="SchoolType" ColumnName="SchoolType" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="PostalAddress" ColumnName="PostalAddress" />
+                <ScalarProperty Name="Town" ColumnName="Town" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_IssuedBooks">
+            <EntityTypeMapping TypeName="StudentsModel.t_IssuedBooks">
+              <MappingFragment StoreEntitySet="t_IssuedBooks">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
+                <ScalarProperty Name="IssuedCopies" ColumnName="IssuedCopies" />
+                <ScalarProperty Name="BookNo" ColumnName="BookNo" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="BorrowerId" ColumnName="BorrowerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="t_Languages">
             <EntityTypeMapping TypeName="StudentsModel.t_Languages">
               <MappingFragment StoreEntitySet="t_Languages">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="LanguageName" ColumnName="LanguageName" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="LanguageName" ColumnName="LanguageName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_LostBooks">
+            <EntityTypeMapping TypeName="StudentsModel.t_LostBooks">
+              <MappingFragment StoreEntitySet="t_LostBooks">
+                <ScalarProperty Name="ReportedBy_Id" ColumnName="ReportedBy_Id" />
+                <ScalarProperty Name="DateReported" ColumnName="DateReported" />
+                <ScalarProperty Name="BookNo" ColumnName="BookNo" />
+                <ScalarProperty Name="BorrowerId" ColumnName="BorrowerId" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="t_Publishers">
             <EntityTypeMapping TypeName="StudentsModel.t_Publishers">
               <MappingFragment StoreEntitySet="t_Publishers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="t_RegisterBooks">
-            <EntityTypeMapping TypeName="StudentsModel.t_RegisterBooks">
-              <MappingFragment StoreEntitySet="t_RegisterBooks">
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="PublishedYear" ColumnName="PublishedYear" />
-                <ScalarProperty Name="PublisherId" ColumnName="PublisherId" />
-                <ScalarProperty Name="Copies" ColumnName="Copies" />
-                <ScalarProperty Name="Edition" ColumnName="Edition" />
-                <ScalarProperty Name="ISBN_No" ColumnName="ISBN_No" />
-                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+          <EntitySetMapping Name="t_ReturnedBooks">
+            <EntityTypeMapping TypeName="StudentsModel.t_ReturnedBooks">
+              <MappingFragment StoreEntitySet="t_ReturnedBooks">
+                <ScalarProperty Name="ReturnedStatus" ColumnName="ReturnedStatus" />
+                <ScalarProperty Name="ReturnedDate" ColumnName="ReturnedDate" />
+                <ScalarProperty Name="ReturnedCopies" ColumnName="ReturnedCopies" />
                 <ScalarProperty Name="BookNo" ColumnName="BookNo" />
-                <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="BorrowerId" ColumnName="BorrowerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Stream">
+            <EntityTypeMapping TypeName="StudentsModel.t_Stream">
+              <MappingFragment StoreEntitySet="t_Stream">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -354,11 +876,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="t_Stream">
-            <EntityTypeMapping TypeName="StudentsModel.t_Stream">
-              <MappingFragment StoreEntitySet="t_Stream">
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
+          <EntitySetMapping Name="t_User">
+            <EntityTypeMapping TypeName="StudentsModel.t_User">
+              <MappingFragment StoreEntitySet="t_User">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -375,6 +897,64 @@
                 <ScalarProperty Name="EmailID" ColumnName="EmailID" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Location">
+            <EntityTypeMapping TypeName="StudentsModel.t_Location">
+              <MappingFragment StoreEntitySet="t_Location">
+                <ScalarProperty Name="Createdby_Id" ColumnName="Createdby_Id" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Authors">
+            <EntityTypeMapping TypeName="StudentsModel.t_Authors">
+              <MappingFragment StoreEntitySet="t_Authors">
+                <ScalarProperty Name="Createdby_Id" ColumnName="Createdby_Id" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_Vendors">
+            <EntityTypeMapping TypeName="StudentsModel.t_Vendors">
+              <MappingFragment StoreEntitySet="t_Vendors">
+                <ScalarProperty Name="Createdby_Id" ColumnName="Createdby_Id" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="PostalAddress" ColumnName="PostalAddress" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_RegisterBooks">
+            <EntityTypeMapping TypeName="StudentsModel.t_RegisterBooks">
+              <MappingFragment StoreEntitySet="t_RegisterBooks">
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="Pages" ColumnName="Pages" />
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="PublishedYear" ColumnName="PublishedYear" />
+                <ScalarProperty Name="PublisherId" ColumnName="PublisherId" />
+                <ScalarProperty Name="Copies" ColumnName="Copies" />
+                <ScalarProperty Name="Edition" ColumnName="Edition" />
+                <ScalarProperty Name="ISBN_No" ColumnName="ISBN_No" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="BookNo" ColumnName="BookNo" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

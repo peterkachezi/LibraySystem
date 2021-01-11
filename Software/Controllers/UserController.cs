@@ -397,12 +397,44 @@ namespace Software.Controllers
 
         }
 
-    
         public ActionResult Login()
         {
-            
-                return View("");
-            
+            return View();
+        }
+        [HttpPost]
+
+        public ActionResult Login(UserBLL userBLL)
+        {
+
+            using (StudentsEntities db = new StudentsEntities())
+            {
+                var userDetails = db.t_Users.Where(x => x.EmailID == userBLL.EmailID && x.Password == userBLL.Password).FirstOrDefault();
+
+                if (userDetails == null)
+                {
+                    TempData["Error"] = "Wrong usernam or password";
+
+                    return RedirectToAction("Login", "User");
+                }
+                else
+                {
+                    Session["Id"] = userDetails.Id;
+
+                    Session["FirstName"] = userDetails.FirstName;
+
+                    return RedirectToAction("Index", "Home");
+
+                }
+
+            }
+
+
+        }
+        public ActionResult Logout()
+        {
+            Guid id = (Guid)Session["Id"];
+            Session.Abandon();
+            return RedirectToAction("Login", "User");
 
         }
     }

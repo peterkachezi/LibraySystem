@@ -1,5 +1,16 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿
+
+@{
+
+    if (Session["Id"] == null)
+    {
+        // Response.Redirect("~/Login/User");
+        Response.Redirect("/User/Login");
+    }
+}
+
+<!DOCTYPE html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -52,8 +63,22 @@
                             <img src="~/Content/content/production/images/img.jpg" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
+
+
                             <span>Welcome,</span>
-                            <h2>John Doe</h2>
+                            <h2>
+
+                                @if (Session["FirstName"] == null)
+                                {
+                                    Response.Redirect("/User/Login");
+                                }
+                                else
+                                {@Session["FirstName"].ToString()}
+
+                            </h2>
+
+
+
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
@@ -66,39 +91,45 @@
                             <h3>General</h3>
                             <ul class="nav side-menu">
                                 <li>
-                                    <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                                    <a><i class="fa fa-home"></i>Settings <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="/Home/Contact">Home</a></li>
                                         <li><a href="/Category/Index">Genres/Categories</a></li>
                                         <li><a href="/Publisher/Index">Publishers</a></li>
                                         <li><a href="/Language/Index">Languages</a></li>
                                         <li><a href="/GetLaguage/Index">Get Languages</a></li>
+                                        <li><a href="/Location/Index">Location</a></li>
+                                        <li><a href="/Author/Index">Authors</a></li>
+                                        <li><a href="/Vendor/Index">Vendors</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a><i class="fa fa-bookmark-o"></i> Manage Books <span class="fa fa-chevron-down"></span></a>
+                                    <a><i class="fa fa-bookmark-o"></i> Library Master <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/RegisterBook/Index">Register Books</a></li>
-                                        <li><a href="#">Issue Book</a></li>
-                                        <li><a href="#">Return Book</a></li>
-                                        <li><a href="#">Report Lost Book</a></li>
-                                        <li><a href="#">Add Stock</a></li>
-                                        <li><a href="#">Form Buttons</a></li>
+                                        <li><a href="/RegisterBook/Index">New Books Entry</a></li>
+                                    
+                                
+                                        <li><a href="/IssuedBook/Index">Issued Books</a></li>
+                                        <li><a href="/ReturnedBook/Index">Returned Books </a></li>
+                           
+                                        <li><a href="/BulkUpload/Index">Bulk Upload</a></li>
+                                        <li><a href="/Loader/Index">Loader</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a><i class="fa fa-user"></i>Students<span class="fa fa-chevron-down"></span></a>
+                                    <a><i class="fa fa-user"></i>Library Management<span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/Stream/Index">Streams</a></li>
-                                        <li><a href="/Student/Index">Students</a></li>
-              
+                                        <li><a href="/IssueBook/Index">Issue Books</a></li>
+                                        <li><a href="/IssuedBook/ReturnBook">Return Books</a></li>
+                                        <li><a href="/LostBook/Index">Lost Books</a></li>
+
                                     </ul>
                                 </li>
                                 <li>
                                     <a><i class="fa fa-table"></i> Manage Users <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="/User/Index">Users</a></li>
-                                    
+
                                     </ul>
                                 </li>
                                 <li>
@@ -199,10 +230,19 @@
                         <a id="menu_toggle"><i class="fa fa-bars"></i></a>
                     </div>
                     <nav class="nav navbar-nav">
+
                         <ul class=" navbar-right">
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="~/Content/content/production/images/img.jpg" alt="">John Doe
+                                    <img src="~/Content/content/production/images/img.jpg" alt="">
+
+                                    @if (Session["FirstName"] == null)
+                                    {
+                                        Response.Redirect("/Login/User");
+                                    }
+                                    else
+                                    {@Session["FirstName"].ToString()}
+
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="javascript:;"> Profile</a>
@@ -211,7 +251,10 @@
                                         <span>Settings</span>
                                     </a>
                                     <a class="dropdown-item" href="javascript:;">Help</a>
-                                    <a class="dropdown-item" href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                    <a class="dropdown-item" href="/User/Logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+
+
+
                                 </div>
                             </li>
 
@@ -338,10 +381,8 @@
     <!-- bootstrap-daterangepicker -->
     <script src="~/Content/content/vendors/moment/min/moment.min.js"></script>
     <script src="~/Content/content/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-
     <!-- Custom Theme Scripts -->
     <script src="~/Content/content/build/js/custom.min.js"></script>
-
     <!-- Datatables -->
     <script src="~/Content/content/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="~/Content/content/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -358,4 +399,5 @@
     <script src="~/Content/content/vendors/jszip/dist/jszip.min.js"></script>
     <script src="~/Content/content/vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="~/Content/content/vendors/pdfmake/build/vfs_fonts.js"></script>
+
 </body>
