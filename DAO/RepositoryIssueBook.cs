@@ -11,13 +11,13 @@ namespace DAO
     public class RepositoryIssueBook
     {
 
-        public static bool ReturnBook(IssueBookBLL issueBookBLL)
+        public static bool IssueBook(IssueBookBLL issueBookBLL, byte borrowerType)
         {
             using (StudentsEntities context = new StudentsEntities())
             {
                 try
                 {
-                    var t_IssuedBooks = new t_IssuedBooks
+                    var t_IssueBooks = new t_IssueBooks
                     {
                         Id = Guid.NewGuid(),
 
@@ -29,12 +29,14 @@ namespace DAO
 
                         BorrowerId = issueBookBLL.BorrowerId,
 
-                        Status = (byte)BookStatus.Issued,
+                        Status = (byte)BookStatus.Active,
+
+                        BorrowerType = borrowerType == 0 ? (byte)BorrowerType.Student : borrowerType == 1 ? (byte)BorrowerType.Staff : (byte)BorrowerType.Member,
 
                         IssuedDate = DateTime.Now,
                     };
 
-                    context.t_IssuedBooks.Add(t_IssuedBooks);
+                    context.t_IssueBooks.Add(t_IssueBooks);
 
                     return context.SaveChanges() > 0;
                 }
@@ -47,13 +49,11 @@ namespace DAO
             }
         }
 
-
-
         public static List<IssueBookBLL> IssuedBooks()
         {
             using (StudentsEntities context = new StudentsEntities())
             {
-                var t_IssuedBooks = context.t_IssuedBooks.OrderByDescending(x => x.IssuedDate).ToList();
+                var t_IssuedBooks = context.t_IssueBooks.OrderByDescending(x => x.IssuedDate).ToList();
 
                 var books = new List<IssueBookBLL>();
 
@@ -79,7 +79,7 @@ namespace DAO
 
                     book.IssuedDate = t_IssuedBook.IssuedDate;
 
-                    book.Status = (byte)BookStatus.Issued;
+                    // book.Status = (byte)BookStatus.Issued;
 
                     book.StatusDescription = UtilitiesBLL.GetDescription((BookStatus)(byte)t_IssuedBook.Status);
 
@@ -106,8 +106,6 @@ namespace DAO
                     book.Id = t_RegisterBook.Id;
 
                     book.Title = t_RegisterBook.Title;
-
-
 
                     book.BookNo = t_RegisterBook.BookNo;
 
@@ -144,29 +142,29 @@ namespace DAO
         {
             using (StudentsEntities context = new StudentsEntities())
             {
-                var t_IssuedBooks = context.t_IssuedBooks.Find(id);
+                var t_IssueBooks = context.t_IssueBooks.Find(id);
 
                 return new IssueBookBLL
                 {
-                    Id = t_IssuedBooks.Id,
+                    Id = t_IssueBooks.Id,
 
-                    BorrowerId = t_IssuedBooks.BorrowerId,
+                    BorrowerId = t_IssueBooks.BorrowerId,
 
-                    BookId = t_IssuedBooks.BookId,
+                    BookId = t_IssueBooks.BookId,
 
-                    BookNo = t_IssuedBooks.BookNo,
+                    BookNo = t_IssueBooks.BookNo,
 
-                    IssuedCopies = t_IssuedBooks.IssuedCopies,
+                    IssuedCopies = t_IssueBooks.IssuedCopies,
 
-                    IssuedDate = t_IssuedBooks.IssuedDate,
+                    IssuedDate = t_IssueBooks.IssuedDate,
 
-                    BorrowerName = t_IssuedBooks.t_Students.FirstName + " " + t_IssuedBooks.t_Students.LastName,
+                    BorrowerName = t_IssueBooks.t_Students.FirstName + " " + t_IssueBooks.t_Students.LastName,
 
-                    AdmNo = t_IssuedBooks.t_Students.AdmNo,
+                    AdmNo = t_IssueBooks.t_Students.AdmNo,
 
-                    Title = t_IssuedBooks.t_RegisterBooks.Title,
+                    Title = t_IssueBooks.t_RegisterBooks.Title,
 
-                    ISBN_No = t_IssuedBooks.t_RegisterBooks.ISBN_No,
+                    ISBN_No = t_IssueBooks.t_RegisterBooks.ISBN_No,
 
 
                 };
@@ -195,6 +193,8 @@ namespace DAO
 
                     student.LastName = t_Student.LastName;
 
+                    student.Name = t_Student.FirstName +" "+ t_Student.LastName;
+
                     student.ClassName = t_Student.ClassName;
 
                     student.StreamId = t_Student.StreamId;
@@ -218,8 +218,7 @@ namespace DAO
                 {
                     using (var transaction = context.Database.BeginTransaction())
                     {
-                        var t_IssuedBooks = context.t_IssuedBooks.Find(id);
-
+                        var t_IssuedBooks = context.t_IssueBooks.Find(id);
 
                         t_IssuedBooks.Status = (byte)BookStatus.Canceled;
 

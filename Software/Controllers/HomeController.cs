@@ -13,12 +13,20 @@ namespace Software.Controllers
         // [Authorize]
         public ActionResult Index()
         {
+
             ViewBag.Count = RepositoryRegisterBook.GetAllBooks().Count;
 
-            ViewBag.IssuedBooks = RepositoryIssueBook.IssuedBooks().Count;
+            var midnight = DateTime.Today;
 
-            ViewBag.IssuedBooks = RepositoryIssueBook.IssuedBooks().Count;
+            ViewBag.IssuedBooks = RepositoryIssueBook.IssuedBooks().Where(x => x.IssuedDate >= midnight).ToList().Count;
 
+            ViewBag.ReturnedBooks = RepositoryReturnedBook.GetAllReturnedBooks().Where(x => x.ReturnedDate >= midnight).ToList().Count;
+
+            ViewBag.Authors = RepositoryAuthor.GetAllAuthors().Count;
+
+            ViewBag.LostBooks = RepositoryLostBook.GetAllLostBooks().Where(x => x.DateReported >= midnight).ToList().Count;
+
+            ViewBag.Publishers = RepositoryPublisher.GetAllPublishers().Count;
 
 
             return View();

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Web.Mvc;
 
 namespace DAO
 {
@@ -19,10 +19,10 @@ namespace DAO
                     var t_Authors = new t_Authors 
                     {
                         Id = Guid.NewGuid(),
+                            
+                        Name = authorBLL.Name.Substring(0, 1).ToUpper() + authorBLL.Name.Substring(1).ToLower(),
 
-                        Name  = authorBLL .Name ,
-
-                        Createdby_Id =authorBLL .Createdby_Id ,
+                        Createdby_Id = authorBLL .Createdby_Id ,
 
                         CreateDate = DateTime.Now,
                     };
@@ -65,10 +65,6 @@ namespace DAO
                 return authors;
             }
         }
-
-
-
-
 
         public static AuthorBLL  GetSingleAuthor(Guid id)
         {
@@ -117,11 +113,7 @@ namespace DAO
             }
         }
 
-
-
-
-
-
+       
 
     }
 

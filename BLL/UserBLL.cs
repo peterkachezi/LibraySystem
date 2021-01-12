@@ -26,5 +26,7 @@ namespace BLL
         public Nullable<System.Guid> PasswordResetToken { get; set; }
 
         public string RandomPassword { get; set; }
+
+        public string LoginHashedPassword { get; set; }
     }
 }

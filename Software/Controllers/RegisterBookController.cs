@@ -36,6 +36,8 @@ namespace Software.Controllers
 
             ViewBag.Locations = RepositoryLocation.GetAllLocation();
 
+            ViewBag.Vendors = RepositoryVendor.GetAllVendors();
+
             // end
             return View();
         }

@@ -32,7 +32,6 @@ namespace Software.Controllers
         public ActionResult Creates(UserBLL userBLL)
         {
 
-
             var isExist = IsEmailExist(userBLL.EmailID);
 
             if (isExist)
@@ -51,22 +50,15 @@ namespace Software.Controllers
 
                 if (result)
                 {
-
                     TempData["Success"] = "User account has been successfully created!" + " has been sent to your email id :" + userBLL.EmailID;
-
 
                     return RedirectToAction("Index");
                 }
 
             }
 
-
-            //}
-
             TempData["Error"] = "Failled to add user. Please try again!";
             return View();
-
-
 
         }
         public ActionResult Create(UserBLL userBLL)
@@ -96,11 +88,9 @@ namespace Software.Controllers
                             randomString += letters[r.Next(0, 35)].ToString();
                         }
 
-
                         string RandomPassword = randomString.ToString();
 
                         string db_RandomPassword = HashPassword.Hash(randomString.ToString());
-
 
                         userBLL.ActivationCode = Guid.NewGuid();
 
@@ -131,17 +121,11 @@ namespace Software.Controllers
 
                         SendVerificationLinkEmail(userBLL.EmailID, userBLL.ActivationCode.ToString(), RandomPassword);
 
-                        //if (result)
-                        //{
-
                         TempData["Success"] = "User account has been successfully created!" + " has been sent to your email id :" + userBLL.EmailID;
 
-
                         return RedirectToAction("Index");
-                        //}
+
                     }
-
-
 
                     catch (Exception ex)
                     {
@@ -153,41 +137,7 @@ namespace Software.Controllers
 
             }
 
-
         }
-        [HttpGet]
-        public ActionResult Edit(Guid Id)
-        {
-            var language = RepositoryLanguage.GetSingleLanguage(Id);
-
-            return View(language);
-        }
-        [HttpPost]
-        public ActionResult Edit(Guid id, UserBLL userBLL)
-        {
-            var results = RepositoryUser.EditUser(id, userBLL);
-
-            if (results)
-            {
-                TempData["Success"] = "Language updated successfully!";
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                TempData["Error"] = "Failed to update facility. Please try again!";
-            }
-
-            return View(userBLL);
-        }
-        [NonAction]
-        public bool IsEmailExist(string EmailID)
-        {
-            var v = RepositoryUser.GetAllUsers().Where(x => x.EmailID == EmailID).FirstOrDefault();
-
-            return v != null;
-
-        }
-
         [NonAction]
         public void SendVerificationLinkEmail(string EmailID, string activationCode, string RandomPassword)
 
@@ -203,6 +153,7 @@ namespace Software.Controllers
             var fromEmailPassword = "2989525829895258";
 
             string subject = "Your account is successfully created";
+
             string body = "Dear ebook Library User" +
                                     "<br/>Your abook account has been successfully created " +
                                     "<br/>Please click the link below to activate your account <br/> " + " " + link + " " +
@@ -239,6 +190,40 @@ namespace Software.Controllers
                 smtp.Send(message);
 
         }
+        [HttpGet]
+        public ActionResult Edit(Guid Id)
+        {
+            var language = RepositoryLanguage.GetSingleLanguage(Id);
+
+            return View(language);
+        }
+        [HttpPost]
+        public ActionResult Edit(Guid id, UserBLL userBLL)
+        {
+            var results = RepositoryUser.EditUser(id, userBLL);
+
+            if (results)
+            {
+                TempData["Success"] = "Language updated successfully!";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["Error"] = "Failed to update facility. Please try again!";
+            }
+
+            return View(userBLL);
+        }
+        [NonAction]
+        public bool IsEmailExist(string EmailID)
+        {
+            var v = RepositoryUser.GetAllUsers().Where(x => x.EmailID == EmailID).FirstOrDefault();
+
+            return v != null;
+
+        }
+
+
 
         [NonAction]
         public void ResendPassword(string EmailID, string RandomPassword)
@@ -408,23 +393,38 @@ namespace Software.Controllers
 
             using (StudentsEntities db = new StudentsEntities())
             {
-                var userDetails = db.t_Users.Where(x => x.EmailID == userBLL.EmailID && x.Password == userBLL.Password).FirstOrDefault();
+                var password = userBLL.Password;
+
+                string LoginHashedPassword = HashPassword.Hash(password.ToString());
+
+                var userDetails = db.t_Users.Where(x => x.EmailID == userBLL.EmailID && x.Password == LoginHashedPassword).FirstOrDefault();
 
                 if (userDetails == null)
                 {
-                    TempData["Error"] = "Wrong usernam or password";
+                    TempData["Error"] = "Wrong usernam or password,please check your inputs";
 
                     return RedirectToAction("Login", "User");
                 }
                 else
                 {
-                    Session["Id"] = userDetails.Id;
+                    if (!userDetails.IsEmailVerified)
+                    {
+                        TempData["Info"] = "Your account has not been activated Please login to  " + userBLL.EmailID + " and click on the activation link sent on registration";
+                        return RedirectToAction("Login", "User");
+                    }
 
-                    Session["FirstName"] = userDetails.FirstName;
+                    else
+                    {
+                        Session["Id"] = userDetails.Id;
 
-                    return RedirectToAction("Index", "Home");
+                        Session["FirstName"] = userDetails.FirstName;
+
+                        return RedirectToAction("Index", "Home");
+
+                    }
 
                 }
+
 
             }
 

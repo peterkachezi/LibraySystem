@@ -39,66 +39,18 @@
                         </div>
                     }*@
                 <div class="x_content">
-                    <form method="post" action="/IssuedBook/ReturnBook">
+                    <form method="post" action="/IssueBook/Option">
 
 
 
                         <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">Enter Book No <span class="required">*</span></label>
-                            <div class="col-md-offset-3 col-sm-6">
-                                <input class="form-control" type="text" id="BookNo" name="BookNo" data-validate-linked='email' required='required' />
-                            </div>
-
-                            <button type='button' id="btn-getdata" class="btn btn-success">Get Book</button>
-                        </div>
-
-
-
-                        <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">Book No <span></span></label>
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Select Borrower Type<span class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="text" value="" name="BookNo" data-validate-linked='email' required='required' readonly />
-                                <input class="form-control" type="hidden" value="" name="BookId" data-validate-linked='email' required='required' readonly />
-                            </div>
-                        </div>
-
-                        <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">Title <span></span></label>
-                            <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="text" name="Title" data-validate-linked='email' required='required' readonly />
-                            </div>
-                        </div>
-                        <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">Issued Copies <span></span></label>
-                            <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="text" name="ReturnedCopies" data-validate-linked='email' required='required' readonly />
-                            </div>
-                        </div>
-
-                        <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">ISBN No <span></span></label>
-                            <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="text" name="ISBN_No" data-validate-linked='email' required='required' readonly />
-                            </div>
-                        </div>
-
-                        <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">Issued To <span></span></label>
-                            <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="hidden" name="BorrowerId" data-validate-linked='email' required='required' readonly />
-
-                                <input class="form-control" type="text" name="BorrowerName" data-validate-linked='email' required='required' readonly />
-                            </div>
-                        </div>
-                        
-
-                        <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">Book Status<span class="required">*</span></label>
-                            <div class="col-md-6 col-sm-6">
-                                <select id="heard" class="form-control" name="ReturnedStatus" required>
+                                <select id="heard" class="form-control" name="borrowerType" required>
                                     <option value="">Choose..</option>
-                                    <option value="Good">Good</option>
-                                    <option value="Damaged">Damaged</option>
+                                    <option value="Student">Student</option>
+                                    <option value="Staff">Staff</option>
+                                    <option value="Member">Member</option>
 
                                 </select>
                             </div>
@@ -176,7 +128,7 @@
                 $("input[name='BorrowerName']").val(data.BorrowerName);
                 $("input[name='BorrowerId']").val(data.BorrowerId);
                 $("input[name='BookId']").val(data.BookId);
-                
+
             }
         });
     });

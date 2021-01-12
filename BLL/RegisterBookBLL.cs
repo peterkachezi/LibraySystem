@@ -27,7 +27,10 @@ namespace BLL
         public System.Guid LocationId { get; set; }
         public string AuthorName { get; set; }
         public string LocationName { get; set; }
-
+        public System.Guid VendorId { get; set; }
+        public string VendorName { get; set; }
+        public string BarCode { get; set; }
+        public string Pages { get; set; }
 
     }
 }

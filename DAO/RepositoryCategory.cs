@@ -23,6 +23,8 @@ namespace DAO
                         CategoryName = categoryBLL.CategoryName,
 
                         CreateDate = DateTime.Now,
+
+                        CreatedBy=categoryBLL .CreatedBy ,
                     };
 
                     context.t_Categories.Add(t_Categories);
@@ -56,6 +58,8 @@ namespace DAO
 
                     category.CreateDate = t_Book_Category.CreateDate;
 
+                    category.CreatedBy = t_Book_Category.CreatedBy;
+
                     categories.Add(category);
                 }
 
@@ -78,6 +82,7 @@ namespace DAO
                     CategoryName = t_Categories.CategoryName,
 
                     CreateDate = t_Categories.CreateDate,
+
                 };
             }
         }

@@ -1,11 +1,10 @@
 ﻿using BLL;
 using DAO;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-
+using Microsoft.AspNet.Identity;
+using System.Web;
+using System.Security.Claims;
 
 namespace Software.Controllers
 {
@@ -31,7 +30,9 @@ namespace Software.Controllers
         [HttpPost]
         public ActionResult Create(CategoryBLL bookCategoryBLL)
         {
-            
+
+
+
             var result = RepositoryCategory.AddCategory(bookCategoryBLL);
             if (result)
             {

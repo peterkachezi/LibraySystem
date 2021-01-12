@@ -12,11 +12,18 @@ namespace DAO
     using System;
     using System.Collections.Generic;
     
-    public partial class t_Categories
+    public partial class t_IssueBooks
     {
         public System.Guid Id { get; set; }
-        public string CategoryName { get; set; }
-        public string CreatedBy { get; set; }
-        public System.DateTime CreateDate { get; set; }
+        public System.Guid BorrowerId { get; set; }
+        public System.Guid BookId { get; set; }
+        public string BookNo { get; set; }
+        public string IssuedCopies { get; set; }
+        public System.DateTime IssuedDate { get; set; }
+        public byte Status { get; set; }
+        public byte BorrowerType { get; set; }
+    
+        public virtual t_RegisterBooks t_RegisterBooks { get; set; }
+        public virtual t_Students t_Students { get; set; }
     }
 }

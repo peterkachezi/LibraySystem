@@ -20,7 +20,7 @@ namespace DAO
                     {
                         Id = Guid.NewGuid(),
 
-                        Name = vendorBLL.Name,
+                        Name = vendorBLL.FirstName + " "+ vendorBLL.LastName,
 
                         MobileNumber = vendorBLL.MobileNumber,
 

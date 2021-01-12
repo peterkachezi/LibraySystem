@@ -13,6 +13,7 @@ namespace BLL
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
+        public string Name { get; set; }
         public string ClassName { get; set; }
         public System.Guid StreamId { get; set; }
 

@@ -31,18 +31,31 @@ namespace Software.Controllers
         [HttpPost]
         public ActionResult Create(AuthorBLL authorBLL)
         {
-            
-            var result = RepositoryAuthor.AddAuthor(authorBLL);
-            if (result)
+            var isExist = isAuthorExist(authorBLL.Name);
+
+            if(isExist)
             {
-                TempData["Success"] = "Category added successfully!";
+                TempData["Error"] = "Author already exist!";
 
-                return RedirectToAction("Index");
+                return View("Create");
+
             }
+            else
+            {
+                var result = RepositoryAuthor.AddAuthor(authorBLL);
 
-            TempData["Error"] = "Failed to add Facility. Please try again!";
+                if (result)
+                {
+                    TempData["Success"] = "Category added successfully!";
 
-            return View();
+                    return RedirectToAction("Index");
+                }
+
+                TempData["Error"] = "Failed to add Facility. Please try again!";
+
+                return View();
+            }
+         
         }
 
 
@@ -72,12 +85,14 @@ namespace Software.Controllers
             return View(authorBLL);
         }
 
+        [NonAction]
+        public bool isAuthorExist(string Name)
+        {
+            var get_Author = RepositoryAuthor.GetAllAuthors().Where(x => x.Name == Name).FirstOrDefault();
 
-
-
-
+            return get_Author != null;
+        }
 
     }
-
 
 }

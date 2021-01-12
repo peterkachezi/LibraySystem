@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -31,7 +33,7 @@
                 <section class="login_content">
                     <p class="text-muted font-13 m-b-30">
 
-                 
+
 
                         @if (TempData["Error"] != null)
                         {
@@ -40,6 +42,13 @@
                             </div>
                         }
 
+
+                        @if (TempData["Info"] != null)
+                        {
+                            <div class="alert alert-info" role="alert">
+                                @TempData["Info"]
+                            </div>
+                        }
 
                     </p>
 

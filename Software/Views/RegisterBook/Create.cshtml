@@ -83,10 +83,6 @@
                             </div>
                         </div>
 
-
-
-
-
                         <div class="field item form-group">
                             <label class="col-form-label col-md-3 col-sm-3  label-align">ISBN No <span class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
@@ -94,6 +90,20 @@
                             </div>
                         </div>
 
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Vendors<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <select id="heard" class="form-control" name="VendorId" required>
+                                    @if (ViewBag.Vendors != null)
+                                    {
+                                        foreach (var vendor in ViewBag.Vendors)
+                                        {
+                                            <option value="@vendor.Id"> @vendor.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="field item form-group">
                             <label class="col-form-label col-md-3 col-sm-3  label-align">Edition <span class="required">*</span></label>
@@ -162,7 +172,19 @@
                             </div>
                         </div>
 
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Pages <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" name="Pages" data-validate-linked='email' required='required' />
+                            </div>
+                        </div>
 
+                        <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Barcode<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" name="BarCode" data-validate-linked='email' required='required' />
+                            </div>
+                        </div>
 
                         <div class="field item form-group">
                             <label class="col-form-label col-md-3 col-sm-3  label-align">Delivery Date <span class="required">*</span></label>

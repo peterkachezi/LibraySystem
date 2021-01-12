@@ -51,13 +51,6 @@
                             </div>
                         </div>
 
-                        <div class="field item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3  label-align">Sub Title <span class="required">*</span></label>
-                            <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="text" value="@Model.SubTitle" name="SubTitle" data-validate-linked='email' required='required' readonly />
-                            </div>
-                        </div>
-
 
                         <div class="field item form-group">
                             <label class="col-form-label col-md-3 col-sm-3  label-align">Book No <span class="required">*</span></label>
@@ -108,9 +101,23 @@
 
 
                         <div class="field item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3  label-align">Select Borrower Type<span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6">
+                                <select id="heard" class="form-control" name="borrowerType" required>
+                                    <option value="">Choose..</option>
+                                    <option value="0">Student</option>
+                                    <option value="1">Staff</option>
+                                    <option value="2">Member</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="field item form-group">
                             <label class="col-form-label col-md-3 col-sm-3  label-align">Enter Adm No / PF No <span class="required">*</span></label>
                             <div class="col-md-offset-3 col-sm-6">
-                                <input class="form-control" type="text" id="AdmNo" name="AdmNo" data-validate-linked='email' required='required' />
+                                <input class="form-control" type="text" id="MembershipNo" name="MembershipNo" data-validate-linked='email' required='required' />
                             </div>
 
                             <button type='button' id="btn-getdata" class="btn btn-success">Find Student</button>
@@ -184,14 +191,12 @@
     }).prop('checked', false);
 
 
-
-
     $("#btn-getdata").click(function () {
-        $.get("/IssueBook/GetStudent?AdmNo=" + $("#AdmNo").val(), function (data, status) {
+        $.get("/IssueBook/GetBorrower?MembershipNo=" + $("#MembershipNo").val(), function (data, status) {
             if (data == null) {
                 alert("Does not exist");
             } else {
-                $("input[name='Name']").val(data.FirstName + ' ' + data.LastName);
+                $("input[name='Name']").val(data.Name);
                 $("input[name='BorrowerId']").val(data.Id);
             }
         });

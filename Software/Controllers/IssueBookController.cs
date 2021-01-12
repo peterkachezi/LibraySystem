@@ -22,18 +22,26 @@ namespace Software.Controllers
         }
 
         [HttpGet]
-        public ActionResult IssueBook()
+        public ActionResult Option()
         {
-           
+
+            return View();
+        }
+
+
+
+        [HttpGet]
+        public ActionResult IssueStudent()
+        {
+
             return View();
         }
 
         [HttpPost]
-        public ActionResult IssueBook(IssueBookBLL issueBookBLL)
+        public ActionResult IssueBook(IssueBookBLL issueBookBLL, byte borrowerType)
         {
+            var result = RepositoryIssueBook.IssueBook(issueBookBLL, borrowerType);
 
-
-            var result = RepositoryIssueBook.ReturnBook(issueBookBLL);
             if (result)
             {
                 TempData["Success"] = "Book has been successfully issued!";
@@ -49,8 +57,8 @@ namespace Software.Controllers
 
         [HttpGet]
 
-        public ActionResult GetBook(Guid Id)
-        {         
+        public ActionResult GetIssueDetails(Guid Id)
+        {
             var book = RepositoryRegisterBook.GetSingleBook(Id);
             return View(book);
         }
@@ -78,11 +86,53 @@ namespace Software.Controllers
             return new JsonResult() { Data = null, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
+
         [HttpGet]
-        public ActionResult Student()
+        public ActionResult GetBorrower(string MembershipNo)
         {
-            return View();
+            var student = RepositoryIssueBook.GetAllStudent().Where(a => a.AdmNo == MembershipNo).FirstOrDefault();
+
+            if (student != null)
+            {
+                StudentBLL file = new StudentBLL()
+                {
+                    AdmNo = student.AdmNo,
+
+                    Name = student.FirstName + " " + student.LastName,
+
+                    Id = student.Id
+                };
+
+                return new JsonResult() { Data = file, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+                  
+            else
+            {
+                var member = RepositoryMember.GetAllMembers().Where(a => a.MembershipNo == MembershipNo).FirstOrDefault();
+
+                if (member != null)
+                {
+                    MemberBLL file = new MemberBLL()
+                    {
+                        MembershipNo = member.MembershipNo,
+
+                        Name = member.Name,
+
+                        Id = member.Id
+                    };
+
+                    return new JsonResult() { Data = file, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                }
+
+                return new JsonResult() { Data = null, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+
+            }
+
+
+
         }
+
 
 
 

@@ -6,9 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="3746d044a8f6472486c9ef216d8ecc8c" Name="Diagram1">
         <EntityTypeShape EntityType="StudentsModel.t_Bulk" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="StudentsModel.t_Categories" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="StudentsModel.t_Instituiton" Width="1.5" PointX="7.75" PointY="8.75" />
-        <EntityTypeShape EntityType="StudentsModel.t_IssuedBooks" Width="1.5" PointX="5.25" PointY="4.625" />
         <EntityTypeShape EntityType="StudentsModel.t_Languages" Width="1.5" PointX="0.75" PointY="5.125" />
         <EntityTypeShape EntityType="StudentsModel.t_LostBooks" Width="1.5" PointX="8.25" PointY="4.75" />
         <EntityTypeShape EntityType="StudentsModel.t_Publishers" Width="1.5" PointX="0.75" PointY="2.125" />
@@ -17,21 +15,26 @@
         <EntityTypeShape EntityType="StudentsModel.t_Students" Width="1.5" PointX="3" PointY="9.25" />
         <EntityTypeShape EntityType="StudentsModel.t_User" Width="1.5" PointX="8.75" PointY="0.75" />
         <EntityTypeShape EntityType="StudentsModel.t_Users" Width="1.5" PointX="9.75" PointY="8.75" />
-        <AssociationConnector Association="StudentsModel.FK_t_IssuedBooks_t_Students" />
         <AssociationConnector Association="StudentsModel.FK_t_LostBooks_t_Students" />
         <AssociationConnector Association="StudentsModel.FK_t_Students_t_Stream" />
         <EntityTypeShape EntityType="StudentsModel.t_Location" Width="1.5" PointX="12.375" PointY="7.75" />
         <EntityTypeShape EntityType="StudentsModel.t_Authors" Width="1.5" PointX="10.375" PointY="4.75" />
         <EntityTypeShape EntityType="StudentsModel.t_Vendors" Width="1.5" PointX="11.375" PointY="0.75" />
-        <EntityTypeShape EntityType="StudentsModel.t_RegisterBooks" Width="1.5" PointX="14.625" PointY="3.25" />
+        <EntityTypeShape EntityType="StudentsModel.t_RegisterBooks" Width="1.5" PointX="14.625" PointY="2.375" />
         <AssociationConnector Association="StudentsModel.FK_t_RegisterBooks_t_Authors" />
-        <AssociationConnector Association="StudentsModel.FK_t_IssuedBooks_t_RegisterBooks" />
         <AssociationConnector Association="StudentsModel.FK_t_RegisterBooks_t_Languages" />
         <AssociationConnector Association="StudentsModel.FK_t_RegisterBooks_t_Location" />
         <AssociationConnector Association="StudentsModel.FK_t_LostBooks_t_RegisterBooks" />
         <AssociationConnector Association="StudentsModel.FK_t_RegisterBooks_t_Publishers" />
+        <AssociationConnector Association="StudentsModel.FK_t_RegisterBooks_t_RegisterBooks" />
         <AssociationConnector Association="StudentsModel.FK_t_ReturnedBooks_t_RegisterBooks" />
-      </Diagram>
+        <EntityTypeShape EntityType="StudentsModel.t_Categories" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="StudentsModel.t_IssueBooks" Width="1.5" PointX="16.875" PointY="6" />
+        <AssociationConnector Association="StudentsModel.FK_t_IssuedBooks_t_RegisterBooks" />
+        <AssociationConnector Association="StudentsModel.FK_t_IssuedBooks_t_Students" />
+        <EntityTypeShape EntityType="StudentsModel.t_Employees" Width="1.5" PointX="3.375" PointY="3.75" />
+        <EntityTypeShape EntityType="StudentsModel.t_Members" Width="1.5" PointX="5.375" PointY="3.75" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

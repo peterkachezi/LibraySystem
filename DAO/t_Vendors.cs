@@ -14,6 +14,12 @@ namespace DAO
     
     public partial class t_Vendors
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public t_Vendors()
+        {
+            this.t_RegisterBooks = new HashSet<t_RegisterBooks>();
+        }
+    
         public System.Guid Id { get; set; }
         public string Name { get; set; }
         public string MobileNumber { get; set; }
@@ -23,5 +29,8 @@ namespace DAO
         public string PostalCode { get; set; }
         public System.DateTime CreateDate { get; set; }
         public Nullable<System.Guid> Createdby_Id { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<t_RegisterBooks> t_RegisterBooks { get; set; }
     }
 }

@@ -11,14 +11,23 @@ namespace BLL
 
     public enum BookStatus
     {
-        [Description("Issued")]
-        Issued,
+        [Description("Active")]
+        Active,
         [Description("Returned")]
         Returned,
         [Description("Canceled")]
         Canceled
     }
 
+    public enum BorrowerType
+    {
+        [Description("Student")]
+        Student,
+        [Description("Staff")]
+        Staff,
+        [Description("Member")]
+        Member
+    }
 
 
     public class IssueBookBLL

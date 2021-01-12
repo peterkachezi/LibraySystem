@@ -10,7 +10,6 @@ namespace DAO
 {
     public class RepositoryRegisterBook
     {
-
         public static bool AddBook(RegisterBookBLL registerBookBLL)
         {
             using (StudentsEntities context = new StudentsEntities())
@@ -46,6 +45,12 @@ namespace DAO
                         LocationId = registerBookBLL.LocationId,
 
                         AuthorId = registerBookBLL.AuthorId,
+
+                        VendorId = registerBookBLL.VendorId,
+
+                        Pages = registerBookBLL.Pages,
+
+                        BarCode = registerBookBLL.BarCode,
                     };
 
                     context.t_RegisterBooks.Add(t_RegisterBooks);
@@ -65,6 +70,7 @@ namespace DAO
         {
             using (StudentsEntities context = new StudentsEntities())
             {
+
                 var t_RegisterBooks = context.t_RegisterBooks.OrderByDescending(x => x.CreateDate).ToList();
 
                 var books = new List<RegisterBookBLL>();
@@ -101,9 +107,21 @@ namespace DAO
 
                     book.DeliveryDate = t_RegisterBook.DeliveryDate;
 
-                    book.LocationName = t_RegisterBook.t_Location.Name;
+                    book.VendorId = (t_RegisterBook.VendorId == null || t_RegisterBook.VendorId == Guid.Empty) ? Guid.Empty : (Guid)t_RegisterBook.VendorId;
 
-                    book.AuthorName = t_RegisterBook.t_Authors.Name;
+                    book.AuthorId = (t_RegisterBook.AuthorId == null || t_RegisterBook.AuthorId == Guid.Empty) ? Guid.Empty : (Guid)t_RegisterBook.AuthorId;
+
+                    book.LocationId = (t_RegisterBook.LocationId == null || (Guid)t_RegisterBook.LocationId == Guid.Empty) ? Guid.Empty : (Guid)t_RegisterBook.LocationId;
+
+                    book.LocationName = t_RegisterBook.t_Location?.Name;
+
+                    book.AuthorName = t_RegisterBook.t_Authors?.Name;
+
+                    book.VendorName = t_RegisterBook.t_Vendors?.Name;
+
+                    book.Pages = t_RegisterBook.Pages;
+
+                    book.BarCode = t_RegisterBook.BarCode;
 
                     books.Add(book);
                 }
@@ -144,11 +162,17 @@ namespace DAO
 
                     DeliveryDate = t_RegisterBooks.DeliveryDate,
 
-                    CategoryId = (Guid)t_RegisterBooks.CategoryId,
+                    CategoryId = (t_RegisterBooks.CategoryId == null || t_RegisterBooks.CategoryId == Guid.Empty) ? Guid.Empty : (Guid)t_RegisterBooks.CategoryId,
 
-                    AuthorId =(Guid)t_RegisterBooks .AuthorId ,
+                    AuthorId = (t_RegisterBooks.AuthorId == null || t_RegisterBooks.AuthorId == Guid.Empty) ? Guid.Empty : (Guid)t_RegisterBooks.AuthorId,
 
-                    LocationId = (Guid)t_RegisterBooks.LocationId,
+                    LocationId = (t_RegisterBooks.LocationId == null || t_RegisterBooks.LocationId == Guid.Empty) ? Guid.Empty : (Guid)t_RegisterBooks.LocationId,
+
+                    VendorId = (t_RegisterBooks.VendorId == null || t_RegisterBooks.VendorId == Guid.Empty) ? Guid.Empty : (Guid)t_RegisterBooks.VendorId,
+
+                    Pages = t_RegisterBooks.Pages,
+
+                    BarCode = t_RegisterBooks.BarCode,
 
 
                 };
@@ -184,6 +208,17 @@ namespace DAO
                         t_RegisterBooks.DeliveryDate = registerBookBLL.DeliveryDate;
 
                         t_RegisterBooks.CategoryId = registerBookBLL.CategoryId;
+
+                        t_RegisterBooks.AuthorId = registerBookBLL.AuthorId;
+
+                        t_RegisterBooks.LocationId = registerBookBLL.LocationId;
+
+                        t_RegisterBooks.VendorId = registerBookBLL.VendorId;
+
+                        t_RegisterBooks.Pages = registerBookBLL.Pages;
+
+                        t_RegisterBooks.BarCode = registerBookBLL.BarCode;
+
 
                         context.SaveChanges();
 

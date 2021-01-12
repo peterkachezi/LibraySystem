@@ -126,7 +126,7 @@ namespace Software.Controllers
         public ActionResult ReturnedBook()
         {
 
-            var returnedBooks = RepositoryReturnBook.GetAllReturnedBooks();
+            var returnedBooks = RepositoryReturnedBook.GetAllReturnedBooks();
 
             ViewBag.ReturnedBooks = returnedBooks;
 

@@ -9,18 +9,22 @@ using System.Web.Mvc;
 
 namespace Software.Controllers
 {
-    public class ReturnedBookController : Controller
+    public class ReturnBookController : Controller
     {
         // GET: Category
         public ActionResult Index()
         {
 
-            var returnedBooks = RepositoryReturnBook.GetAllReturnedBooks();
+            var returnedBooks = RepositoryReturnedBook.GetAllReturnedBooks();
 
             ViewBag.ReturnedBooks = returnedBooks;
 
             return View();
         }
+
+
+
+
 
 
         [HttpGet]
