@@ -18,7 +18,6 @@ namespace DAO
         public t_Students()
         {
             this.t_LostBooks = new HashSet<t_LostBooks>();
-            this.t_IssueBooks = new HashSet<t_IssueBooks>();
         }
     
         public System.Guid Id { get; set; }
@@ -34,7 +33,5 @@ namespace DAO
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<t_LostBooks> t_LostBooks { get; set; }
         public virtual t_Stream t_Stream { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<t_IssueBooks> t_IssueBooks { get; set; }
     }
 }

@@ -1,12 +1,11 @@
 ﻿
 
 @{
-
-    if (Session["Id"] == null)
-    {
-        // Response.Redirect("~/Login/User");
-        Response.Redirect("/User/Login");
-    }
+if (Session["Id"] == null)
+{
+ Response.Redirect("~/Login/User");
+  Response.Redirect("/User/Login");
+}
 }
 
 <!DOCTYPE html>
@@ -20,14 +19,10 @@
     <link rel="icon" href="~/Content/content/production/images/favicon.ico" type="image/ico" />
 
     <title>ebook | Library</title>
-
-
-
     <link href="~/Content/content/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/content/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/content/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/content/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-
 
     <!-- Bootstrap -->
     <link href="~/Content/content/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -103,6 +98,8 @@
                                         <li><a href="/Location/Index">Location</a></li>
                                         <li><a href="/Author/Index">Authors</a></li>
                                         <li><a href="/Vendor/Index">Vendors</a></li>
+                                        <li><a href="/Employee/Index">Employee</a></li>
+                                        <li><a href="/Chart/Index">Chart</a></li>
                                     </ul>
                                 </li>
                                 <li>

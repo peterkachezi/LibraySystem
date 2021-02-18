@@ -20,7 +20,7 @@ namespace DAO
                     {
                         Id = Guid.NewGuid(),
 
-                        CategoryName = categoryBLL.CategoryName,
+                        Name = categoryBLL.Name.Substring(0, 1).ToUpper() + categoryBLL.Name.Substring(1).ToLower(),
 
                         CreateDate = DateTime.Now,
 
@@ -54,7 +54,7 @@ namespace DAO
 
                     category.Id = t_Book_Category.Id;
 
-                    category.CategoryName = t_Book_Category.CategoryName;
+                    category.Name = t_Book_Category.Name;
 
                     category.CreateDate = t_Book_Category.CreateDate;
 
@@ -79,7 +79,7 @@ namespace DAO
                 {
                     Id = t_Categories.Id,
 
-                    CategoryName = t_Categories.CategoryName,
+                    Name = t_Categories.Name,
 
                     CreateDate = t_Categories.CreateDate,
 
@@ -97,7 +97,7 @@ namespace DAO
                     {
                         var t_Book_Categories = context.t_Categories.Find(id);
 
-                        t_Book_Categories.CategoryName = categoryBLL.CategoryName;
+                        t_Book_Categories.Name = categoryBLL.Name;
 
                         context.SaveChanges();
 
@@ -114,12 +114,6 @@ namespace DAO
 
             }
         }
-
-
-
-
-
-
 
     }
 

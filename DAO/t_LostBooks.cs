@@ -21,7 +21,7 @@ namespace DAO
         public System.DateTime DateReported { get; set; }
         public Nullable<System.Guid> ReportedBy_Id { get; set; }
     
-        public virtual t_Students t_Students { get; set; }
         public virtual t_RegisterBooks t_RegisterBooks { get; set; }
+        public virtual t_Students t_Students { get; set; }
     }
 }

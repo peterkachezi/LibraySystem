@@ -15,7 +15,7 @@ namespace DAO
     public partial class t_Categories
     {
         public System.Guid Id { get; set; }
-        public string CategoryName { get; set; }
+        public string Name { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime CreateDate { get; set; }
     }

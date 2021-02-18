@@ -21,9 +21,7 @@ namespace DAO
         public string IssuedCopies { get; set; }
         public System.DateTime IssuedDate { get; set; }
         public byte Status { get; set; }
-        public byte BorrowerType { get; set; }
     
         public virtual t_RegisterBooks t_RegisterBooks { get; set; }
-        public virtual t_Students t_Students { get; set; }
     }
 }

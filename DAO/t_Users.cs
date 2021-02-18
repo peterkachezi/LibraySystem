@@ -24,5 +24,6 @@ namespace DAO
         public string MobileNumber { get; set; }
         public System.Guid ActivationCode { get; set; }
         public Nullable<System.Guid> PasswordResetToken { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     }
 }

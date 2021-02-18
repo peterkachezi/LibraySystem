@@ -29,18 +29,28 @@ namespace Software.Controllers
         [HttpPost]
         public ActionResult Create(PublisherBLL publisherBLL)
         {
-
-            var result = RepositoryPublisher.AddPublisher(publisherBLL);
-            if (result)
+            var isExist = isPublisherExist(publisherBLL.Name);
+            if (isExist)
             {
-                TempData["Success"] = "Publisher added successfully!";
+                TempData["Error"] = "Publisher already exist!";
 
-                return RedirectToAction("Index");
+                return View("Create");
             }
+            else
+            {
+                var result = RepositoryPublisher.AddPublisher(publisherBLL);
+                if (result)
+                {
+                    TempData["Success"] = "Publisher added successfully!";
 
-            TempData["Error"] = "Failed to add Facility. Please try again!";
+                    return RedirectToAction("Index");
+                }
 
-            return View();
+                TempData["Error"] = "Failed to add Facility. Please try again!";
+
+                return View();
+            }
+          
         }
 
 
@@ -70,27 +80,12 @@ namespace Software.Controllers
             return View(publisherBLL);
         }
 
+        [NonAction]
+        public bool isPublisherExist(string Name)
+        {
+            var get_Publisher = RepositoryPublisher.GetAllPublishers().Where(x => x.Name == Name).FirstOrDefault();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            return get_Publisher != null;
+        }
     }
 }

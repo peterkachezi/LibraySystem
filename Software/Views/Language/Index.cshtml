@@ -5,90 +5,101 @@
     var languages = ViewBag.Languages as List<BLL.LanguageBLL>;
 }
 
-<div class="col-md-12 col-sm-12 ">
-    <div class="x_panel">
-        <div class="x_title">
-            <h2>Responsive example<small>Users</small></h2>
-            <a href="/Language/Create/ " class="btn btn-primary">Add</a>
-            <ul class="nav navbar-right panel_toolbox">
-                <li>
-                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Settings 1</a>
-                        <a class="dropdown-item" href="#">Settings 2</a>
-                    </div>
-                </li>
-                <li>
-                    <a class="close-link"><i class="fa fa-close"></i></a>
-                </li>
-            </ul>
-            <div class="clearfix"></div>
-        </div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
 
-        <div class="x_content">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card-box table-responsive">
-                        <p class="text-muted font-13 m-b-30">
+<script>
+    $(document).ready(function () {
+        $("#btnAlertMessage").click(function () {
 
-                            @if (TempData["Success"] != null)
-                            {
-                                <div class="alert alert-success" role="alert">
-                                    @TempData["Success"]
-                                </div>
-                            }
-                        </p>
+        });
+        alert("Alart Mesage");
+    });
+</script>
 
-                        <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>SNo.</th>
-                                    <th>Language Name</th>
-                                    <th>Entry Date</th>
-                                    <th>Edit</th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
+<input type="button" value="Alert Message" name="alertMessage" id="btnAlertMessage"/>
 
-                                @if (languages != null)
+
+@*<div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Responsive example<small>Users</small></h2>
+                <a href="/Language/Create/ " class="btn btn-primary">Add</a>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Settings 1</a>
+                            <a class="dropdown-item" href="#">Settings 2</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box table-responsive">
+                            <p class="text-muted font-13 m-b-30">
+
+                                @if (TempData["Success"] != null)
                                 {
-                                    int count = 1;
-
-                                    foreach (var language in languages)
-                                    {
-
-                                        <tr>
-                                            <td>@count</td>
-
-                                            <td class="text-capitalize">@language.LanguageName</td>
-                                            <td>@language.CreateDate.ToShortDateString() </td>
-                                            <td>
-                                                <a href="/Language/Edit/@language.Id " class="">Edit</a>
-
-                                            </td>
-                                        </tr>
-
-                                        count++;
-                                    }
+                                    <div class="alert alert-success" role="alert">
+                                        @TempData["Success"]
+                                    </div>
                                 }
+                            </p>
 
-                            </tbody>
-                        </table>
+                            <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>SNo.</th>
+                                        <th>Language Name</th>
+                                        <th>Entry Date</th>
+                                        <th>Edit</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if (languages != null)
+                                    {
+                                        int count = 1;
+
+                                        foreach (var language in languages)
+                                        {
+
+                                            <tr>
+                                                <td>@count</td>
+
+                                                <td class="text-capitalize">@language.LanguageName</td>
+                                                <td>@language.CreateDate.ToShortDateString() </td>
+                                                <td>
+                                                    <a href="/Language/Edit/@language.Id " class="">Edit</a>
+
+                                                </td>
+                                            </tr>
+
+                                            count++;
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
 
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </div>*@
 
-<style>
-    .btn {
-        margin-left: 50em;
-    }
-</style>
+

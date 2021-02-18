@@ -28,7 +28,6 @@ namespace Software.Controllers
             var streams = RepositoryStream.GetAllStreams();
             ViewBag.Streams = streams;
 
-      
 
             // end
             return View();

@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+}
+
+<h2>Index</h2>
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - C3 Charts</title>
+    <link href="~/Content/c3.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/c3.min.js"></script>
+    <script src="~/Scripts/d3.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+               
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                </ul>
+            </div>
+        </div>
+    </div>
+ 
+</body>
+
+</html>
+
+<div id="pieChart"></div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "/Chart/PieChart",
+            data: {},
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                successFunc(response);
+            },
+        });
+
+        function successFunc(jsondata) {
+            var data = {};
+            var countryNames = [];
+            jsondata.forEach(function (e) {
+                countryNames.push(e.CountryName);
+                data[e.CountryName] = e.CountryPopulation;
+            })
+            var chart = c3.generate({
+                bindto: '#pieChart',
+                data: {
+                    json: [data],
+                    keys: {
+                        value: countryNames,
+                    },
+                    type: 'pie'
+                },
+                color: {
+                    pattern: ['#1f77b4', '#aec7e8', '#ff7f0e', '#ffbb78', '#2ca02c', '#98df8a', '#d62728', '#ff9896', '#9467bd', '#c5b0d5', '#8c564b', '#c49c94', '#e377c2', '#f7b6d2', '#7f7f7f', '#c7c7c7', '#bcbd22', '#dbdb8d', '#17becf', '#9edae5']
+                },
+
+                pie: {
+                    label: {
+                        format: function (value, ratio, id) {
+                            return value;
+                        }
+                    }
+                }  
+
+            });
+        }
+    });
+</script>  

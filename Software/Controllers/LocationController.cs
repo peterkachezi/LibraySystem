@@ -31,18 +31,30 @@ namespace Software.Controllers
         [HttpPost]
         public ActionResult Create(LocationBLL  locationBLL)
         {
-            
-            var result = RepositoryLocation.AddLocation(locationBLL);
-            if (result)
+            var isExist = isLocationExist(locationBLL.Name);
+
+            if (isExist)
             {
-                TempData["Success"] = "Location added successfully!";
+                TempData["Error"] = "Location already exist!";
 
-                return RedirectToAction("Index");
+                return View("Create");
             }
+            else
+            {
+                var result = RepositoryLocation.AddLocation(locationBLL);
 
-            TempData["Error"] = "Failed to add Location. Please try again!";
+                if (result)
+                {
+                    TempData["Success"] = "Location added successfully!";
 
-            return View();
+                    return RedirectToAction("Index");
+                }
+
+                TempData["Error"] = "Failed to add Location. Please try again!";
+
+                return View();
+            }
+          
         }
 
 
@@ -51,6 +63,7 @@ namespace Software.Controllers
         public ActionResult Edit(Guid Id)
         {
             var location = RepositoryLocation .GetSingleLocation (Id);
+
             return View(location);
         }
 
@@ -59,7 +72,16 @@ namespace Software.Controllers
         [HttpPost]
         public ActionResult Edit(Guid id, LocationBLL  locationBLL)
         {
+            var isExist = isLocationExist(locationBLL.Name);
+            if (isExist)
+            {
+                TempData["Info"] = "No record has been affected";
+                return RedirectToAction("Index");
+            }
+
+
             var results = RepositoryLocation .EditLocation (id, locationBLL);
+
             if (results)
             {
                 TempData["Success"] = "Category updated successfully!";
@@ -72,8 +94,14 @@ namespace Software.Controllers
             return View(locationBLL);
         }
 
+        [NonAction]
 
+        public bool isLocationExist(string Name)
+        {
+            var get_Location = RepositoryLocation.GetAllLocation().Where(x => x.Name == Name).FirstOrDefault();
 
+           return get_Location != null;
+        }
 
 
 

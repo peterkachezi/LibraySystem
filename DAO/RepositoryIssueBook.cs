@@ -11,7 +11,7 @@ namespace DAO
     public class RepositoryIssueBook
     {
 
-        public static bool IssueBook(IssueBookBLL issueBookBLL, byte borrowerType)
+        public static bool IssueBook(IssueBookBLL issueBookBLL)
         {
             using (StudentsEntities context = new StudentsEntities())
             {
@@ -31,7 +31,7 @@ namespace DAO
 
                         Status = (byte)BookStatus.Active,
 
-                        BorrowerType = borrowerType == 0 ? (byte)BorrowerType.Student : borrowerType == 1 ? (byte)BorrowerType.Staff : (byte)BorrowerType.Member,
+                       // BorrowerType = borrowerType == 0 ? (byte)BorrowerType.Student : borrowerType == 1 ? (byte)BorrowerType.Staff : (byte)BorrowerType.Member,
 
                         IssuedDate = DateTime.Now,
                     };
@@ -75,7 +75,7 @@ namespace DAO
 
                     book.ISBN_No = t_IssuedBook.t_RegisterBooks.ISBN_No;
 
-                    book.BorrowerName = t_IssuedBook.t_Students.FirstName + " " + t_IssuedBook.t_Students.LastName;
+                   // book.BorrowerName = t_IssuedBook.t_Students.FirstName + " " + t_IssuedBook.t_Students.LastName;
 
                     book.IssuedDate = t_IssuedBook.IssuedDate;
 
@@ -158,9 +158,9 @@ namespace DAO
 
                     IssuedDate = t_IssueBooks.IssuedDate,
 
-                    BorrowerName = t_IssueBooks.t_Students.FirstName + " " + t_IssueBooks.t_Students.LastName,
+                   // BorrowerName = t_IssueBooks.t_Students.FirstName + " " + t_IssueBooks.t_Students.LastName,
 
-                    AdmNo = t_IssueBooks.t_Students.AdmNo,
+                   // AdmNo = t_IssueBooks.t_Students.AdmNo,
 
                     Title = t_IssueBooks.t_RegisterBooks.Title,
 
@@ -237,6 +237,35 @@ namespace DAO
 
             }
         }
+
+        public static bool UpdateStock(Guid id,IssueBookBLL issueBookBLL)
+        {
+            using (StudentsEntities context = new StudentsEntities())
+            {
+                try
+                {
+                    using (var transaction = context.Database.BeginTransaction())
+                    {
+                        var t_IssuedBooks = context.t_IssueBooks.Find(id);
+
+                        t_IssuedBooks.Status = (byte)BookStatus.Canceled;
+
+                        context.SaveChanges();
+
+                        transaction.Commit();
+
+                        return true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return false;
+                }
+
+            }
+        }
+
 
     }
 

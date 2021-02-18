@@ -28,8 +28,6 @@ namespace Software.Controllers
             return View();
         }
 
-
-
         [HttpGet]
         public ActionResult IssueStudent()
         {
@@ -38,9 +36,27 @@ namespace Software.Controllers
         }
 
         [HttpPost]
-        public ActionResult IssueBook(IssueBookBLL issueBookBLL, byte borrowerType)
+        public ActionResult IssueBook(Guid id, IssueBookBLL issueBookBLL)
         {
-            var result = RepositoryIssueBook.IssueBook(issueBookBLL, borrowerType);
+            var result = RepositoryIssueBook.IssueBook(issueBookBLL);
+
+            var get_book = RepositoryIssueBook.GetAllBooks().Where(a => a.Id == id).FirstOrDefault();
+
+            RegisterBookBLL file = new RegisterBookBLL()
+            {
+                Id = get_book.Id,
+
+                Copies = get_book.Copies,
+            };
+
+            int CurrentCopies = int.Parse(file.Copies);
+
+            int IssuedCopies = int.Parse(issueBookBLL.IssuedCopies);
+
+            var RemainingCopies = CurrentCopies - IssuedCopies;
+
+            var update_stock = RepositoryIssueBook.UpdateStock(id, issueBookBLL);
+
 
             if (result)
             {
@@ -105,7 +121,7 @@ namespace Software.Controllers
 
                 return new JsonResult() { Data = file, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
-                  
+
             else
             {
                 var member = RepositoryMember.GetAllMembers().Where(a => a.MembershipNo == MembershipNo).FirstOrDefault();
@@ -131,11 +147,8 @@ namespace Software.Controllers
 
 
 
+
+
         }
-
-
-
-
-
     }
 }

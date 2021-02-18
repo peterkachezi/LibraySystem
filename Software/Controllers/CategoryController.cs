@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using System.Web;
 using System.Security.Claims;
+using System.Linq;
 
 namespace Software.Controllers
 {
@@ -26,24 +27,34 @@ namespace Software.Controllers
         {
             return View();
         }
-
+   
         [HttpPost]
-        public ActionResult Create(CategoryBLL bookCategoryBLL)
+        public ActionResult Create(CategoryBLL categoryBLL)
         {
+            var isExist = isCategoryExist(categoryBLL.Name);
 
-
-
-            var result = RepositoryCategory.AddCategory(bookCategoryBLL);
-            if (result)
+            if (isExist)
             {
-                TempData["Success"] = "Category added successfully!";
+                TempData["Error"] = "Category already exist!";
 
-                return RedirectToAction("Index");
+                return View("Create");
+            }
+            else
+            {
+                var result = RepositoryCategory.AddCategory(categoryBLL);
+                if (result)
+                {
+                    TempData["Success"] = "Category added successfully!";
+
+                    return RedirectToAction("Index");
+                }
+
+                TempData["Error"] = "Failed to add category. Please try again!";
+
+                return View();
             }
 
-            TempData["Error"] = "Failed to add Facility. Please try again!";
-
-            return View();
+       
         }
 
 
@@ -74,6 +85,13 @@ namespace Software.Controllers
         }
 
 
+        [NonAction]
+        public bool isCategoryExist(string Name)
+        {
+            var get_category = RepositoryCategory.GetAllCategories().Where(x => x.Name == Name).FirstOrDefault();
+
+            return get_category != null;
+        }
 
 
 

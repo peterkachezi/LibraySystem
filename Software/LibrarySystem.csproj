@@ -171,8 +171,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AlartController.cs" />
     <Compile Include="Controllers\BulkUploadController.cs" />
     <Compile Include="Controllers\AuthorController.cs" />
+    <Compile Include="Controllers\ChartController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\VendorController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
@@ -195,6 +198,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\c3.css" />
+    <Content Include="Content\c3.min.css" />
     <Content Include="Content\content\build\css\custom.css" />
     <Content Include="Content\content\build\css\custom.min.css" />
     <Content Include="Content\content\build\images\back_disabled.png" />
@@ -228,6 +233,8 @@
     <Content Include="Content\content\src\js\custom.js" />
     <Content Include="Content\content\src\js\examples.js" />
     <Content Include="Content\content\src\js\helpers\smartresize.js" />
+    <Content Include="Content\content\SweetAlart\css\sweetalert.css" />
+    <Content Include="Content\content\SweetAlart\js\sweetalert.min.js" />
     <Content Include="Content\content\vendors\animate.css\animate.css" />
     <Content Include="Content\content\vendors\animate.css\animate.min.css" />
     <Content Include="Content\content\vendors\animate.css\gulpfile.js" />
@@ -3909,6 +3916,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="LICENSE.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\content\docs\fonts\fonts\fontawesome-webfont.eot" />
@@ -4971,6 +4979,10 @@
     <Content Include="Content\content\vendors\validator\package.json" />
     <Content Include="Content\content\vendors\validator\README.md" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\c3.js" />
+    <Content Include="Scripts\c3.min.js" />
+    <Content Include="Scripts\d3.js" />
+    <Content Include="Scripts\d3.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -5045,9 +5057,13 @@
     <Content Include="Views\Member\Create.cshtml" />
     <Content Include="Views\Member\Edit.cshtml" />
     <Content Include="Views\Member\Index.cshtml" />
+    <Content Include="Views\Employee\Create.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Chart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Identity\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

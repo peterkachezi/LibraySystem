@@ -10,10 +10,9 @@ namespace Software.Controllers
     public class HomeController : Controller
     {
         StudentsEntities db = new StudentsEntities();
-        // [Authorize]
+   
         public ActionResult Index()
         {
-
             ViewBag.Count = RepositoryRegisterBook.GetAllBooks().Count;
 
             var midnight = DateTime.Today;
@@ -28,9 +27,9 @@ namespace Software.Controllers
 
             ViewBag.Publishers = RepositoryPublisher.GetAllPublishers().Count;
 
-
             return View();
         }
+
 
     }
 }

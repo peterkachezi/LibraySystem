@@ -50,6 +50,8 @@
                                     <th> Moblie No</th>
                                     <th>Entry Date</th>
                                     <th>Edit</th>
+                                    <th>Delete</th>
+                                    <th>Delete Two</th>
 
                                 </tr>
                             </thead>
@@ -61,22 +63,27 @@
                                     foreach (var user in users)
                                     {
 
-                                <tr>
-                                    <td>@count</td>
+                                        <tr>
+                                            <td>@count</td>
 
-                                    <td class="text-capitalize">@user.FirstName</td>
-                                    <td class="text-capitalize">@user.LastName</td>
-                                    <td class="">@user.EmailID</td>
-                                    <td class="text-capitalize">@user.MobileNumber</td>
+                                            <td class="text-capitalize">@user.FirstName</td>
+                                            <td class="text-capitalize">@user.LastName</td>
+                                            <td class="">@user.EmailID</td>
+                                            <td class="text-capitalize">@user.MobileNumber</td>
 
 
 
-                                    <td>@user.CreateDate.ToShortDateString() </td>
-                                    <td>
-                                        <a href="/User/Edit/@user.Id " class="">Edit</a>
+                                            <td>@user.CreateDate.ToShortDateString() </td>
 
-                                    </td>
-                                </tr>
+                                            <td>
+                                                <a href="/User/Edit/@user.Id " class=""><i class="glyphicon glyphicon-edit"></i></a>
+
+                                            </td>
+                                           
+                                            <td>
+                                                <a href="#" class="btn btn-danger" onclick="DeleteService('@user.Id')"><i class="glyphicon glyphicon-trash"></i> </a>
+                                            </td>
+                                        </tr>
 
                                         count++;
                                     }
@@ -92,6 +99,94 @@
     </div>
 </div>
 
+@*<div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h3 class="modal-title">Delete Employee</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>Are you sure you want to Remove this Employee?</h4>
 
 
 
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                    <a href="#" class="btn btn-success" onclick="DeleteEmployee()">Confirm</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>*@
+@*hidden field for storing current employeeId*@
+<input type="text" id="hiddenEmployeeId" />
+
+@section Styles{
+    <link href="~/Content/content/SweetAlart/css/sweetalert.css" rel="stylesheet" />
+}
+
+
+@section scripts{
+    <script src="~/Content/content/SweetAlart/js/sweetalert.min.js"></script>
+
+    <script>
+
+
+
+        var ConfirmDelete = function (UserId) {
+
+            $("#hiddenEmployeeId").val(UserId);
+            $("#myModal").modal('show');
+
+        }
+
+        var DeleteEmployee = function () {
+
+            var empId = $("#hiddenEmployeeId").val();
+
+            $.ajax({
+
+                type: "POST",
+                url: "/User/deleteEmployeeDetails",
+                data: { Id: empId },
+                success: function (result) {
+
+                    $("#myModal").modal("hide");
+                    $("#row_" + empId).remove();
+
+                }
+
+            })
+
+        }
+
+
+        function DeleteService(e) {
+
+            var id = e;
+
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this  file!",
+                type: "success",
+                showCancelButton: true,
+                confirmButtonColor: "##62b76e",
+                confirmButtonText: "Yes, Procceed!",
+                closeOnConfirm: false
+            }, function () {
+
+                    window.location.href = "/User/DeleteUser/" + id;
+
+            });
+
+        }
+
+
+
+    </script>
+
+}

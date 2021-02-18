@@ -33,11 +33,11 @@
                     <div class="clearfix"></div>
                 </div>
                 @*@if (TempData["Error"] != null)
-                {
-                    <div class="alert alert-danger" role="alert">
-                        @TempData["Error"]
-                    </div>
-                }*@
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @TempData["Error"]
+                        </div>
+                    }*@
                 <div class="x_content">
                     <form method="post" action="/IssueBook/IssueBook">
 
@@ -46,7 +46,7 @@
                         <div class="field item form-group">
                             <label class="col-form-label col-md-3 col-sm-3  label-align">Title <span class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
-                                <input type="hidden" class="form-control" value="@Model.Id  " name="BookId" required />
+                                <input type="hidden" class="form-control" value="@Model.Id  " name="Id" required />
                                 <input class="form-control" type="text" value="@Model.Title " name="Title" data-validate-linked='email' required='required' readonly />
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                         </div>
 
 
-                        <div class="field item form-group">
+                        @*<div class="field item form-group">
                             <label class="col-form-label col-md-3 col-sm-3  label-align">Select Borrower Type<span class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
                                 <select id="heard" class="form-control" name="borrowerType" required>
@@ -111,7 +111,7 @@
 
                                 </select>
                             </div>
-                        </div>
+                        </div>*@
 
 
                         <div class="field item form-group">
@@ -201,6 +201,18 @@
             }
         });
     });
+
+    //$("#MembershipNo").on("keyup", function () {
+    //    $.get("/IssueBook/GetBorrower?MembershipNo=" + $("#MembershipNo").val(), function (data, status) {
+    //        if (data == null) {
+    //            alert("Does not exist");
+    //        } else {
+    //            $("input[name='Name']").val(data.Name);
+    //            $("input[name='BorrowerId']").val(data.Id);
+    //        }
+    //    });
+
+    //});
 
 
 </script>

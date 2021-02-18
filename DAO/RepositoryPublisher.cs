@@ -20,7 +20,7 @@ namespace DAO
                     {
                         Id = Guid.NewGuid(),
 
-                        Name = publisherBLL.Name,
+                        Name = publisherBLL.Name.Substring(0, 1).ToUpper() + publisherBLL.Name.Substring(1).ToLower(),
 
                         CreateDate = DateTime.Now,
                     };

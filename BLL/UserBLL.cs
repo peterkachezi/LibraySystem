@@ -28,5 +28,7 @@ namespace BLL
         public string RandomPassword { get; set; }
 
         public string LoginHashedPassword { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

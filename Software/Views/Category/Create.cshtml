@@ -9,12 +9,20 @@
 <div class="">
 
     <div class="clearfix"></div>
+    <p class="text-muted font-13 m-b-30">
 
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @TempData["Error"]
+            </div>
+        }
+    </p>
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Categories</h2>
+                    <h2>Add Categories</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li>
                             <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -40,7 +48,7 @@
                         <div class="field item form-group">
                             <label class="col-form-label col-md-3 col-sm-3  label-align">Category Name<span class="required">*</span></label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="text" name="CategoryName" data-validate-linked='email' required='required' />
+                                <input class="form-control" type="text" name="Name" data-validate-linked='email' required='required' />
                             </div>
                         </div>
 
@@ -48,8 +56,9 @@
                         <div class="">
                             <div class="form-group">
                                 <div class="col-md-6 offset-md-3">
-                                    <button type='submit' class="btn btn-primary">Submit</button>
-                                    <button type='reset' class="btn btn-success">Reset</button>
+                                    <button type="button" onclick="location.href = '/Category/Index';" id="myButton" class="btn btn-success">Back</button>
+                                     <button type='submit' class="btn btn-primary">Submit</button>
+                                    <button type='reset' class="btn btn-danger">Reset</button>
                                 </div>
                             </div>
                         </div>

@@ -197,6 +197,7 @@
   <ItemGroup>
     <Compile Include="AuthorBLL.cs" />
     <Compile Include="BulkBLL.cs" />
+    <Compile Include="EmployeeBLL.cs" />
     <Compile Include="HashPassword.cs" />
     <Compile Include="IssueBookBLL.cs" />
     <Compile Include="IUserService.cs" />
@@ -220,6 +221,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LICENSE.txt" />
+    <Content Include="Scripts\d3.js" />
+    <Content Include="Scripts\d3.min.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

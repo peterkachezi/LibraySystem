@@ -437,5 +437,40 @@ namespace Software.Controllers
             return RedirectToAction("Login", "User");
 
         }
+
+
+        public JsonResult deleteEmployeeDetails(Guid Id)
+        {
+            using (var context = new StudentsEntities())
+            {
+                var userDetail = context.t_Users.Where(a => a.Id== Id).FirstOrDefault();
+                userDetail.IsDeleted = true;
+                context.SaveChanges();
+            }
+            return Json(new { status = "Success" });
+
+        }
+
+        public ActionResult DeleteUser(Guid Id)
+        {
+            StudentsEntities context = new StudentsEntities();
+            context.t_Users.RemoveRange(context.t_Users.Where(x => x.Id == Id));
+
+            context.SaveChanges();
+
+            TempData["Success"] = "Service has been successfully deleted";
+
+
+            return RedirectToAction("Index", "User");
+        }
+
+
+
+
+
+
+
+
+
     }
 }

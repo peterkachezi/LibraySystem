@@ -25,23 +25,26 @@ namespace DAO
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<t_Authors> t_Authors { get; set; }
         public virtual DbSet<t_Bulk> t_Bulk { get; set; }
+        public virtual DbSet<t_Categories> t_Categories { get; set; }
+        public virtual DbSet<t_Employees> t_Employees { get; set; }
         public virtual DbSet<t_Instituiton> t_Instituiton { get; set; }
         public virtual DbSet<t_Languages> t_Languages { get; set; }
+        public virtual DbSet<t_Location> t_Location { get; set; }
         public virtual DbSet<t_LostBooks> t_LostBooks { get; set; }
+        public virtual DbSet<t_Members> t_Members { get; set; }
         public virtual DbSet<t_Publishers> t_Publishers { get; set; }
+        public virtual DbSet<t_RegisterBooks> t_RegisterBooks { get; set; }
         public virtual DbSet<t_ReturnedBooks> t_ReturnedBooks { get; set; }
         public virtual DbSet<t_Stream> t_Stream { get; set; }
-        public virtual DbSet<t_Students> t_Students { get; set; }
         public virtual DbSet<t_User> t_User { get; set; }
-        public virtual DbSet<t_Users> t_Users { get; set; }
-        public virtual DbSet<t_Location> t_Location { get; set; }
-        public virtual DbSet<t_Authors> t_Authors { get; set; }
         public virtual DbSet<t_Vendors> t_Vendors { get; set; }
-        public virtual DbSet<t_RegisterBooks> t_RegisterBooks { get; set; }
-        public virtual DbSet<t_Categories> t_Categories { get; set; }
+        public virtual DbSet<t_Users> t_Users { get; set; }
+        public virtual DbSet<t_IssueBooksss> t_IssueBooksss { get; set; }
+        public virtual DbSet<t_Complaint> t_Complaint { get; set; }
+        public virtual DbSet<t_Country> t_Country { get; set; }
+        public virtual DbSet<t_Students> t_Students { get; set; }
         public virtual DbSet<t_IssueBooks> t_IssueBooks { get; set; }
-        public virtual DbSet<t_Employees> t_Employees { get; set; }
-        public virtual DbSet<t_Members> t_Members { get; set; }
     }
 }
